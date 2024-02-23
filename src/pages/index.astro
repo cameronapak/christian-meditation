@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Logo from "../components/Logo.astro";
 import { getAllMeditations } from "../api/baserow/meditations";
 import { getAllCreators } from "../api/baserow/creators";
 
@@ -7,59 +8,57 @@ const allMeditations = await getAllMeditations();
 const allCreators = await getAllCreators();
 
 const cssGradients = [
-    'bg-gradient-to-r from-blue-100 to-green-200 text-blue-800',
-    'bg-gradient-to-l from-yellow-100 via-red-200 to-pink-200 text-yellow-800',
-    'bg-gradient-to-br from-purple-200 via-pink-200 to-red-100 text-purple-800',
-    'bg-gradient-to-t from-green-100 via-blue-200 to-indigo-200 text-green-800',
-    'bg-gradient-to-b from-yellow-50 via-orange-100 to-red-200 text-yellow-900',
-    'bg-gradient-to-tr from-pink-100 via-purple-200 to-indigo-300 text-pink-800',
-    'bg-gradient-to-bl from-blue-100 via-purple-200 to-pink-100 text-blue-800',
-    'bg-gradient-to-r from-yellow-50 via-green-100 to-teal-200 text-yellow-900',
-    'bg-gradient-to-l from-red-100 via-yellow-50 to-green-100 text-red-800',
-    'bg-gradient-to-t from-indigo-100 via-blue-200 to-cyan-300 text-indigo-800',
-    'bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 text-gray-800',
-    'bg-gradient-to-tr from-red-100 via-yellow-50 to-green-100 text-red-800',
-    'bg-gradient-to-bl from-teal-100 via-blue-200 to-indigo-300 text-teal-800',
-    'bg-gradient-to-r from-pink-50 via-purple-100 to-indigo-200 text-pink-800',
-    'bg-gradient-to-l from-green-50 via-teal-100 to-blue-200 text-green-800'
+  "bg-gradient-to-r from-blue-100 to-green-200 text-blue-800",
+  "bg-gradient-to-l from-yellow-100 via-red-200 to-pink-200 text-yellow-800",
+  "bg-gradient-to-br from-purple-200 via-pink-200 to-red-100 text-purple-800",
+  "bg-gradient-to-t from-green-100 via-blue-200 to-indigo-200 text-green-800",
+  "bg-gradient-to-b from-yellow-50 via-orange-100 to-red-200 text-yellow-900",
+  "bg-gradient-to-tr from-pink-100 via-purple-200 to-indigo-300 text-pink-800",
+  "bg-gradient-to-bl from-blue-100 via-purple-200 to-pink-100 text-blue-800",
+  "bg-gradient-to-r from-yellow-50 via-green-100 to-teal-200 text-yellow-900",
+  "bg-gradient-to-l from-red-100 via-yellow-50 to-green-100 text-red-800",
+  "bg-gradient-to-t from-indigo-100 via-blue-200 to-cyan-300 text-indigo-800",
+  "bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 text-gray-800",
+  "bg-gradient-to-tr from-red-100 via-yellow-50 to-green-100 text-red-800",
+  "bg-gradient-to-bl from-teal-100 via-blue-200 to-indigo-300 text-teal-800",
+  "bg-gradient-to-r from-pink-50 via-purple-100 to-indigo-200 text-pink-800",
+  "bg-gradient-to-l from-green-50 via-teal-100 to-blue-200 text-green-800",
 ];
-
-
 ---
 
 <Layout className="bg-white" title="Astwoah Stack">
   <main
     id="main"
-    class="container p-6 flex flex-col gap-4 items-center"
+    class="container p-6 flex flex-col gap-4"
     x-data="{ count: $persist(0) }"
   >
-    <h1 class="text-3xl font-bold">Christian Meditation</h1>
-    <p class="balanced max-w-[65ch] text-center">
-      A simple web starter template crafted with Astro, AlpineJS, HTMX, Daisy
-      UI, Tailwind, and more.
-    </p>
+    <div class="flex flex-col gap-2">
+      <Logo />
+      <p class="balanced max-w-[65ch] m-0">Meditations in the Way of Jesus</p>
+    </div>
 
-    <ul class="grid max-sm:grid-cols-1 grid-cols-2 gap-8">
+    <ul class="grid max-sm:grid-cols-1 grid-cols-2 gap-8 m-0 pl-0">
       {
         allMeditations.results.map((result) => {
           const creator = allCreators.results.find(
             (creator) => creator.id === result.Creator[0].id,
           );
 
-
           // Get randomBgColor but based on the result's id so that it's the same every time.
-          const randomBgColor = cssGradients[
-            result.id % cssGradients.length
-          ];
+          const randomBgColor = cssGradients[result.id % cssGradients.length];
 
           return (
-            <li class={`p-8 flex flex-col gap-4 transition active:scale-95 duration-300 aspect-video bg-red-100 rounded-2xl items-center justify-center ${randomBgColor}`} role="link" x-on:click={`window.location.href = '/meditation?id=${result.id}';`}>
+            <li
+              class={`h-full w-full p-6 cursor-pointer flex flex-col gap-4 transition active:scale-95 duration-300 aspect-video bg-red-100 rounded-2xl items-center justify-center ${randomBgColor}`}
+              role="link"
+              x-on:click={`window.location.href = '/meditation?id=${result.id}';`}
+            >
               {/* <img
                 class="aspect-video rounded-2xl my-0 shadow-md bg-cover object-cover w-full"
                 src={result["Thumbnail URL"]}
                 alt={result.Title}
               /> */}
-              <p class="balanced m-0 text-3xl sm:text-4xl lg:text-5xl text-center font-semibold line-clamp-2">
+              <p class="balanced m-0 text-3xl lg:text-5xl text-center font-semibold line-clamp-2">
                 {result.Title}
               </p>
               <div class="badge glass">{result.Duration.value}</div>
@@ -77,38 +76,11 @@ const cssGradients = [
       }
     </ul>
 
-    <pre>{JSON.stringify(allMeditations, null, 2)}</pre>
-
-    <pre>{JSON.stringify(allCreators, null, 2)}</pre>
-
-    <div class="flex gap-2">
-      <a
-        href="https://github.com/cameronapak/astwoah-stack"
-        target="_blank"
-        class="btn btn-primary"
-      >
-        Get the Code
-      </a>
-
-      <a href="/posts" class="btn btn-neutral"> Visit the Blog</a>
-
-      {/* HTMX Example */}
-      <button
-        class="btn btn-ghost"
-        type="button"
-        hx-get="/api/htmx-partials/rick-roll"
-        hx-target="#htmx-entry-point"
-        hx-swap="innerHTML"
-      >
-        Rick Roll via HTMX
-      </button>
-    </div>
-
-    <section id="htmx-entry-point" class="flex flex-col gap-4"></section>
-
     <p>
-      Created by <a href="https://cameronpak.com" target="_blank">Cameron Pak</a
-      >
+      Website created by <a href="https://cameronpak.com" target="_blank">Cameron Pak</a>
+    </p>
+    <p class="text-xs m-0 italic">
+      Content is owned by their respective creators and curated from YouTube.
     </p>
   </main>
 </Layout>
