@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getMeditationById } from "../api/baserow/meditations";
+
+const id = Astro.url.searchParams.get("id");
+
+if (!id) {
+  return Astro.redirect("/");
+}
+
+const meditation = await getMeditationById(id);
+
+if (!meditation) {
+  return Astro.redirect("/");
+}
+---
+
+<Layout className="bg-white" title="Meditation">
+  <main class="container p-6">
+    <div class="text-sm breadcrumbs">
+      <ul class="!p-0 !m-0">
+        <li><a href="/">Home</a></li> 
+        <li>{meditation.Title}</li> 
+      </ul>
+    </div>
+    <!-- <pre>{JSON.stringify(meditation, null, 2)}</pre> -->
+    <iframe
+      class="aspect-video w-full rounded-2xl shadow-lg"
+      src={'https://www.youtube.com/embed/' + meditation['YouTube Video ID']}
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </main>
+</Layout>

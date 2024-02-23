@@ -73,3 +73,16 @@ export async function getMeditationsByCreatorId(id: number): Promise<MeditationD
 
   return meditations
 }
+
+export async function getMeditationById(id: string): Promise<Result> {
+  const response = await fetch(`https://api.baserow.io/api/database/rows/table/259238/${id}/?user_field_names=true`, {
+    method: "GET",
+    headers: {
+      Authorization: 'Token ' + import.meta.env.BASEROW_API_KEY,
+    }
+  })
+
+  const meditation: Result = await response.json()
+
+  return meditation;
+}
