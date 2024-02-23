@@ -5,9 +5,11 @@ interface Props {
   title: string;
   description?: string;
   className?: string;
+  ogImageUrl?: string;
 }
 
-const { title, description, className } = Astro.props;
+const { title, description, className, ogImageUrl = "https://mugshotbot.com/m/K0Cu8sbV" } = Astro.props;
+const descriptionToUse = description || "Soul Rest " + title;
 ---
 
 <!doctype html>
@@ -15,11 +17,45 @@ const { title, description, className } = Astro.props;
   <head>
     <title>{title}</title>
     <meta charset="UTF-8" />
-    <meta name="description" content={description || "Soul Rest " + title} />
+
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:image" content="https://mugshotbot.com/m/K0Cu8sbV" />
-    <meta property="twitter:card" content="summary_large_image" />
+
+    <!-- HTML Meta Tags -->
+    <title>Soul Rest | Christian Meditations in the Way of Jesus</title>
+    <meta
+      name="description"
+      content={descriptionToUse}
+    />
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://soulrest.netlify.app/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content={title}
+    />
+    <meta
+      property="og:description"
+      content={descriptionToUse}
+    />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="soulrest.netlify.app" />
+    <meta property="twitter:url" content="https://soulrest.netlify.app/" />
+    <meta
+      name="twitter:title"
+      content={title}
+    />
+    <meta
+      name="twitter:description"
+      content={descriptionToUse}
+    />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
