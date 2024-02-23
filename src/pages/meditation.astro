@@ -17,9 +17,11 @@ if (!meditation) {
 ---
 
 <Layout className="bg-white" title="Meditation">
-  <main class="container p-6 flex flex-col gap-4">
-    <div class="flex flex-col gap-0">
+  <main class="container p-6">
+    <div class="flex flex-col gap-2 sticky top-0 py-2 bg-white z-20">
       <Logo />
+    </div>
+    <div class="flex flex-col gap-0">
       <div class="text-sm breadcrumbs m-0">
         <ul class="!p-0 !m-0">
           <li><a href="/">Home</a></li>
@@ -27,7 +29,6 @@ if (!meditation) {
         </ul>
       </div>
     </div>
-    <!-- <pre>{JSON.stringify(meditation, null, 2)}</pre> -->
     <iframe
       class="aspect-video w-full rounded-2xl shadow-lg"
       src={"https://www.youtube.com/embed/" + meditation["YouTube Video ID"]}
@@ -36,7 +37,8 @@ if (!meditation) {
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen></iframe>
     <p>
-      Website created by <a href="https://cameronpak.com" target="_blank">Cameron Pak</a
+      Website created by <a href="https://cameronpak.com" target="_blank"
+        >Cameron Pak</a
       >
     </p>
     <p class="text-xs m-0 italic">
