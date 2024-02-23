@@ -81,13 +81,13 @@ const cssGradients = [
           return (
             <li>
               <a
-                class={`h-full w-full p-6 cursor-pointer flex flex-col gap-4 transition active:scale-95 duration-300 aspect-video bg-red-100 rounded-2xl items-center justify-center no-underline ${randomBgColor}`}
+                class={`relative h-full w-full p-6 cursor-pointer flex flex-col gap-4 transition active:scale-95 duration-300 aspect-video bg-red-100 rounded-2xl items-center justify-center no-underline ${randomBgColor}`}
                 href={`/meditation?id=${result.id}`}
               >
                 <p class="balanced m-0 text-3xl lg:text-5xl text-center font-semibold line-clamp-2">
                   {result.Title}
                 </p>
-                <div class="badge glass">{result.Duration.value}</div>
+                <div class="badge glass absolute bottom-2 right-2">{result.Duration.value}</div>
                 <div class="flex gap-2 items-center">
                   <img
                     class="m-0 w-8 h-8 rounded-full shadow-sm bg-cover object-cover"
