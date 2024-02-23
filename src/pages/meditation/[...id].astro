@@ -5,7 +5,7 @@ import Footer from "../../components/Footer.astro";
 import { getMeditationById } from "../../api/baserow/meditations";
 import { getCreatorById } from "../../api/baserow/creators";
 
-const id = Astro.url.searchParams.get("id");
+const { id } = Astro.params;
 
 if (!id) {
   return Astro.redirect("/");
