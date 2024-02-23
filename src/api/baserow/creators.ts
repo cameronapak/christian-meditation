@@ -1,3 +1,5 @@
+import { fetchAndCache } from '../index';
+
 export interface CreatorData {
   count: number
   next: string
@@ -61,27 +63,31 @@ export async function getAllCreators({
     baseUrl.searchParams.set('search', search);
   }
 
-  const response = await fetch(baseUrl, {
-    method: "GET",
-    headers: {
-      Authorization: 'Token ' + import.meta.env.BASEROW_API_KEY,
-    }
+  const creators: CreatorData = await fetchAndCache({
+    url: baseUrl.href,
+    options: {
+      method: "GET",
+      headers: {
+        Authorization: 'Token ' + import.meta.env.BASEROW_API_KEY,
+      }
+    },
+    cacheKey: `creators-all-${search}`
   })
-
-  const creators: CreatorData = await response.json()
 
   return creators
 }
 
 export async function getCreatorByID(id: number): Promise<Result> {
-  const response = await fetch(`https://api.baserow.io/api/database/rows/table/259237/${id}/?user_field_names=true`, {
-    method: "GET",
-    headers: {
-      Authorization: 'Token ' + import.meta.env.BASEROW_API_KEY,
-    }
+  const creator: Result = await fetchAndCache({
+    url: `https://api.baserow.io/api/database/rows/table/259237/${id}/?user_field_names=true`,
+    options: {
+      method: "GET",
+      headers: {
+        Authorization: 'Token ' + import.meta.env.BASEROW_API_KEY,
+      }
+    },
+    cacheKey: `creator-${id}`
   })
-
-  const creator: Result = await response.json()
 
   return creator
 }

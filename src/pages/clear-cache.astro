@@ -1,0 +1,8 @@
+---
+// The entire purpose of this page is to clear the cache on the server.
+import { clearCache } from '../api/index';
+
+clearCache();
+
+Astro.redirect('/');
+---
