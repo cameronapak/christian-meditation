@@ -77,7 +77,7 @@ export async function getAllCreators({
   return creators
 }
 
-export async function getCreatorByID(id: number): Promise<Result> {
+export async function getCreatorById(id: number): Promise<Result> {
   const creator: Result = await fetchAndCache({
     url: `https://api.baserow.io/api/database/rows/table/259237/${id}/?user_field_names=true`,
     options: {
