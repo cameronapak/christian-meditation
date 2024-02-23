@@ -3,24 +3,27 @@ import "../global.css";
 
 interface Props {
   title: string;
+  description: string;
   className?: string;
 }
 
-const { title, className } = Astro.props;
+const { title, description, className } = Astro.props;
 ---
 
 <!doctype html>
 <html class="bg-white" lang="en">
   <head>
+    <title>{title}</title>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astwoah Stack" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-  </head>
+    <meta property="og:image" content="https://mugshotbot.com/m/K0Cu8sbV" />
+    <meta property="twitter:card" content="summary_large_image" /></head
+  >
 
-  <body class={"prose !max-w-[100vw] w-full " + (className)}>
+  <body class={"prose !max-w-[100vw] w-full " + className}>
     <slot />
   </body>
 </html>

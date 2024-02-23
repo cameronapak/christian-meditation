@@ -27,7 +27,11 @@ const cssGradients = [
 ];
 ---
 
-<Layout className="bg-white" title="Astwoah Stack">
+<Layout
+  className="bg-white"
+  title="Soul Rest | Christian Meditations in the Way of Jesus"
+  description="Soul Rest has Chrisitian meditations by various creators and is free to use."
+>
   <main
     id="main"
     class="container p-6 outline-none"
@@ -87,7 +91,9 @@ const cssGradients = [
                 <p class="balanced m-0 text-3xl lg:text-4xl text-center font-semibold line-clamp-2">
                   {result.Title}
                 </p>
-                <div class="badge glass absolute bottom-2 right-2">{result.Duration.value}</div>
+                <div class="badge glass absolute bottom-2 right-2">
+                  {result.Duration.value}
+                </div>
                 <div class="flex gap-2 items-center">
                   <img
                     class="m-0 w-8 h-8 rounded-full shadow-sm bg-cover object-cover"
