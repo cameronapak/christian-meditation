@@ -4,6 +4,7 @@ import alpinejs from "@astrojs/alpinejs";
 import htmx from "astro-htmx";
 import netlify from "@astrojs/netlify";
 import sentry from "@sentry/astro";
+import swup from '@swup/astro';
 
 const SENTRY_DSN = import.meta.env.SENTRY_DSN;
 const SENTRY_AUTH_TOKEN = import.meta.env.SENTRY_AUTH_TOKEN;
@@ -14,6 +15,7 @@ const integrations = [
   // This entrypoint file is where Alpine plugins are registered.
   alpinejs({ entrypoint: '/src/entrypoint' }),
   htmx(),
+  swup()
 ]
 
 // To enable Sentry monitoring, add the following environment variables.

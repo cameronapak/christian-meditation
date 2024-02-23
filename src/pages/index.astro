@@ -27,15 +27,13 @@ const cssGradients = [
 ---
 
 <Layout className="bg-white" title="Astwoah Stack">
-  <main
-    id="main"
-    class="container p-6"
-    x-data="{ count: $persist(0) }"
-  >
+  <main id="main" class="container p-6 outline-none" x-data="{ count: $persist(0) }">
     <div class="flex flex-col gap-2 sticky top-0 py-2 bg-white z-20">
       <Logo />
     </div>
-    <p class="balanced max-w-[65ch] m-0 py-2">Meditations in the Way of Jesus</p>
+    <p class="balanced max-w-[65ch] m-0 py-2">
+      Meditations in the Way of Jesus
+    </p>
 
     <ul class="grid max-sm:grid-cols-1 grid-cols-2 gap-8 m-0 pl-0 mt-6">
       {
@@ -48,28 +46,24 @@ const cssGradients = [
           const randomBgColor = cssGradients[result.id % cssGradients.length];
 
           return (
-            <li
-              class={`h-full w-full p-6 cursor-pointer flex flex-col gap-4 transition active:scale-95 duration-300 aspect-video bg-red-100 rounded-2xl items-center justify-center ${randomBgColor}`}
-              role="link"
-              x-on:click={`window.location.href = '/meditation?id=${result.id}';`}
-            >
-              {/* <img
-                class="aspect-video rounded-2xl my-0 shadow-md bg-cover object-cover w-full"
-                src={result["Thumbnail URL"]}
-                alt={result.Title}
-              /> */}
-              <p class="balanced m-0 text-3xl lg:text-5xl text-center font-semibold line-clamp-2">
-                {result.Title}
-              </p>
-              <div class="badge glass">{result.Duration.value}</div>
-              <div class="flex gap-2 items-center">
-                <img
-                  class="m-0 w-8 h-8 rounded-full shadow-sm bg-cover object-cover"
-                  src={creator?.Avatar[0].url || ""}
-                  alt={creator?.Name}
-                />
-                <p class="m-0 text-lg">{creator?.Name}</p>
-              </div>
+            <li>
+              <a
+                class={`h-full w-full p-6 cursor-pointer flex flex-col gap-4 transition active:scale-95 duration-300 aspect-video bg-red-100 rounded-2xl items-center justify-center no-underline ${randomBgColor}`}
+                href={`/meditation?id=${result.id}`}
+              >
+                <p class="balanced m-0 text-3xl lg:text-5xl text-center font-semibold line-clamp-2">
+                  {result.Title}
+                </p>
+                <div class="badge glass">{result.Duration.value}</div>
+                <div class="flex gap-2 items-center">
+                  <img
+                    class="m-0 w-8 h-8 rounded-full shadow-sm bg-cover object-cover"
+                    src={creator?.Avatar[0].url || ""}
+                    alt={creator?.Name}
+                  />
+                  <p class="m-0 text-lg">{creator?.Name}</p>
+                </div>
+              </a>
             </li>
           );
         })
@@ -77,7 +71,9 @@ const cssGradients = [
     </ul>
 
     <p>
-      Website created by <a href="https://cameronpak.com" target="_blank">Cameron Pak</a>
+      Website created by <a href="https://cameronpak.com" target="_blank"
+        >Cameron Pak</a
+      >
     </p>
     <p class="text-xs m-0 italic">
       Content is owned by their respective creators and curated from YouTube.
