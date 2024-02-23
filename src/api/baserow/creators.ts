@@ -54,7 +54,7 @@ export interface Meditation {
 
 export async function getAllCreators({
   search = '',
-}: { search?: string }): Promise<CreatorData> {
+}: { search?: string } = {}): Promise<CreatorData> {
   const baseUrl = new URL('https://api.baserow.io/api/database/rows/table/259237/?user_field_names=true');
 
   if (search) {

@@ -32,7 +32,7 @@ export interface Duration {
 export async function getAllMeditations({
   search = '',
   creatorId,
-}: { search?: string, creatorId?: number }): Promise<MeditationData> {
+}: { search?: string, creatorId?: number } = {}): Promise<MeditationData> {
   const baseUrl = new URL('https://api.baserow.io/api/database/rows/table/259238/?user_field_names=true');
 
   if (search) {
