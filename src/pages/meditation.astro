@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Logo from "../components/Logo.astro";
+import Footer from "../components/Footer.astro";
 import { getMeditationById } from "../api/baserow/meditations";
 
 const id = Astro.url.searchParams.get("id");
@@ -36,13 +37,7 @@ if (!meditation) {
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen></iframe>
-    <p>
-      Website created by <a href="https://cameronpak.com" target="_blank"
-        >Cameron Pak</a
-      >
-    </p>
-    <p class="text-xs m-0 italic">
-      Content is owned by their respective creators and curated from YouTube.
-    </p>
+    
+    <Footer />
   </main>
 </Layout>
