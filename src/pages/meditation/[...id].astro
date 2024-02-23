@@ -32,7 +32,7 @@ if (!meditation) {
       <button
         x-data
         class="btn btn-circle btn-outline border-gray-300 rounded-full btn-sm"
-        x-on:click="navigator.clipboard.writeText(window.location.href); alert('Meditation copied to your clipboard. Paste to share!');"
+        x-on:click="navigator.clipboard.writeText(window.location.href); setTimeout(() => alert('Meditation copied to your clipboard. Paste to share!'), 500);"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
