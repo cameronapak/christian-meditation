@@ -57,7 +57,8 @@ const allCreators = await getAllCreators();
       },
     }`}
   >
-    <progress class="fixed top-0 left-0 right-0 progress htmx-indicator p-0 m-0"></progress>
+    <progress class="fixed top-0 left-0 right-0 progress htmx-indicator p-0 m-0"
+    ></progress>
     <div class="flex flex-col gap-2 sticky top-0 py-2 bg-white z-20">
       <Logo />
     </div>
@@ -122,3 +123,10 @@ const allCreators = await getAllCreators();
     <Footer />
   </main>
 </Layout>
+
+<style is:global>
+  /* Backup CSS for when htmx doesn't load the needed CSS to hide the progress bar */
+  body:not(.htmx-request) .htmx-indicator {
+    @apply hidden;
+  }
+</style>
