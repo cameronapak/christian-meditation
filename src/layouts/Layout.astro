@@ -1,5 +1,6 @@
 ---
 import "../global.css";
+import ogImage from '../public/og-image.png';
 
 interface Props {
   title: string;
@@ -8,7 +9,8 @@ interface Props {
   ogImageUrl?: string;
 }
 
-const { title, description, className, ogImageUrl = "https://mugshotbot.com/m/K0Cu8sbV" } = Astro.props;
+const domainUrl = "https://soulrest.melos.church";
+const { title, description, className, ogImageUrl = ogImage.src } = Astro.props;
 const descriptionToUse = description || "Soul Rest " + title;
 ---
 
@@ -29,7 +31,7 @@ const descriptionToUse = description || "Soul Rest " + title;
     />
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://soulrest.netlify.app/" />
+    <meta property="og:url" content={domainUrl} />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -43,8 +45,8 @@ const descriptionToUse = description || "Soul Rest " + title;
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content="soulrest.netlify.app" />
-    <meta property="twitter:url" content="https://soulrest.netlify.app/" />
+    <meta property="twitter:domain" content={domainUrl} />
+    <meta property="twitter:url" content={domainUrl} />
     <meta
       name="twitter:title"
       content={title}
