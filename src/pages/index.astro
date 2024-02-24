@@ -30,7 +30,7 @@ const allCreators = await getAllCreators();
 
             $refs.meditationsList.children[randomIndex].querySelector('a').click();
           }, 500);
-          
+
           return;
         }
 
@@ -46,6 +46,11 @@ const allCreators = await getAllCreators();
           swap: "innerHTML",
           indicator: "#spinner",
         })
+      },
+      init() {
+        if (this.searchQuery) {
+          this.search();
+        }
       },
     }`}
   >
