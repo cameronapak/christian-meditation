@@ -1,7 +1,7 @@
-import * as htmx from 'htmx.org';
-
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
+
+import * as htmx from 'htmx.org';
 
 declare global {
   interface Window {
