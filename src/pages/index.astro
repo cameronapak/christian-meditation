@@ -44,7 +44,10 @@ const allCreators = await getAllCreators();
         window.htmx.ajax('get', "/api/htmx-partials/get-meditations?searchQuery=" + this.searchQuery, {
           target: "#meditations-list",
           swap: "innerHTML",
-          indicator: "#loading",
+        }).then(() => {
+          // Remove the .htmx-request class from the body element.
+          // This is some weird bug I'm experiencing.
+          document.body.classList.remove("htmx-request");
         })
       },
       init() {
@@ -54,6 +57,7 @@ const allCreators = await getAllCreators();
       },
     }`}
   >
+    <progress class="fixed top-0 left-0 right-0 progress htmx-indicator p-0 m-0"></progress>
     <div class="flex flex-col gap-2 sticky top-0 py-2 bg-white z-20">
       <Logo />
     </div>
