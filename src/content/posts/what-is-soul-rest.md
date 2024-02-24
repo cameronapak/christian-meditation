@@ -1,7 +1,7 @@
 ---
 title: Introducing Soul Rest, Meditations in the Way of Jesus
 pubDate: 2024-02-24
-description: 'This is the first post of my new Astro blog.'
+description: 'Find solace in difficult times through spiritual means. Discover peace through Godly community and Christian meditations. Try Soul Rest for free.'
 author: 'Cameron Pak'
 slug: 'what-is-soul-rest'
 image:
