@@ -85,6 +85,10 @@ const cssGradients = [
           // Get randomBgColor but based on the result's id so that it's the same every time.
           const randomBgColor = cssGradients[result.id % cssGradients.length];
 
+          const creatorExists = Boolean(
+            !!creator?.Avatar[0].url && !!creator?.Name,
+          );
+
           return (
             <li>
               <a
@@ -97,14 +101,16 @@ const cssGradients = [
                 <div class="badge glass absolute bottom-2 right-2">
                   {result.Duration.value}
                 </div>
-                <div class="flex gap-2 items-center">
-                  <img
-                    class="m-0 w-8 h-8 rounded-full shadow-sm bg-cover object-cover"
-                    src={creator?.Avatar[0].url || ""}
-                    alt={creator?.Name}
-                  />
-                  <p class="m-0 text-lg">{creator?.Name}</p>
-                </div>
+                {creatorExists ? (
+                  <div class="flex gap-2 items-center">
+                    <img
+                      class="m-0 w-8 h-8 rounded-full shadow-sm bg-cover object-cover"
+                      src={creator?.Avatar[0].url || ""}
+                      alt={creator?.Name}
+                    />
+                    <p class="m-0 text-lg">{creator?.Name}</p>
+                  </div>
+                ) : null}
               </a>
             </li>
           );
