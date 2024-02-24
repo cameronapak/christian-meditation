@@ -20,11 +20,33 @@ const allCreators = await getAllCreators();
     class="container p-6 outline-none"
     x-data={`{
       pickRandomMeditation() {
+        if (document.getElementById("no-results")) {
+          this.searchQuery = "";
+          this.search();
+
+          setTimeout(() => {
+            const numberOfMeditations = $refs.meditationsList.children.length;
+            const randomIndex = Math.floor(Math.random() * numberOfMeditations);
+
+            $refs.meditationsList.children[randomIndex].querySelector('a').click();
+          }, 500);
+          
+          return;
+        }
+
         const numberOfMeditations = $refs.meditationsList.children.length;
         const randomIndex = Math.floor(Math.random() * numberOfMeditations);
 
         $refs.meditationsList.children[randomIndex].querySelector('a').click();
-      }
+      },
+      searchQuery: $persist(""),
+      search() {
+        window.htmx.ajax('get', "/api/htmx-partials/get-meditations?searchQuery=" + this.searchQuery, {
+          target: "#meditations-list",
+          swap: "innerHTML",
+          indicator: "#spinner",
+        })
+      },
     }`}
   >
     <div class="flex flex-col gap-2 sticky top-0 py-2 bg-white z-20">
@@ -33,6 +55,14 @@ const allCreators = await getAllCreators();
     <p class="balanced max-w-[65ch] m-0 py-2">
       Meditations in the Way of Jesus
     </p>
+
+    <input
+      x-on:input.debounce="search()"
+      x-model="searchQuery"
+      type="search"
+      placeholder="Search..."
+      class="input input-bordered bg-white"
+    />
 
     <button
       class="btn btn-secondary rounded-full mt-6 flex gap-2 items-center"
@@ -54,6 +84,7 @@ const allCreators = await getAllCreators();
 
     <ul
       class="list-none grid max-sm:grid-cols-1 grid-cols-2 gap-4 m-0 pl-0 mt-6"
+      id="meditations-list"
       x-ref="meditationsList"
     >
       {

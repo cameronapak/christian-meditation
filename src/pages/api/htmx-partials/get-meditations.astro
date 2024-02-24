@@ -1,0 +1,42 @@
+---
+import MeditationCard from "../../../components/MeditationCard.astro";
+import { getAllMeditations } from "../../../api/baserow/meditations";
+import { getAllCreators } from "../../../api/baserow/creators";
+
+const searchQuery = Astro.url.searchParams.get("searchQuery") || "";
+
+const getMeditationsParams: { search?: string } = {};
+if (searchQuery) {
+  getMeditationsParams.search = searchQuery;
+}
+
+const allMeditations = await getAllMeditations(getMeditationsParams);
+const allCreators = await getAllCreators();
+
+// https://docs.astro.build/en/basics/astro-pages/#page-partials
+export const partial = true;
+---
+
+{
+  allMeditations.results.map((result) => {
+    const creator = allCreators.results.find(
+      (creator) => creator.id === result.Creator[0].id,
+    );
+
+    return (
+      <MeditationCard
+        id={result.id}
+        title={result.Title}
+        duration={result.Duration.value}
+        creatorName={creator?.Name}
+        creatorAvatarUrl={creator?.Avatar[0].url}
+      />
+    );
+  })
+}
+
+{
+  !allMeditations.results.length ? (
+    <p id="no-results">We didn't find any results for that search</p>
+  ) : null
+}
