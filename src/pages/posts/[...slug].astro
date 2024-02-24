@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Logo from "../../components/Logo.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("posts");
@@ -18,10 +19,14 @@ export const prerender = true;
 
 <Layout title={entry.data.title}>
   <article class="p-6 w-full container">
+    <div class="flex flex-col gap-2 sticky top-0 py-2 bg-white z-20">
+      <Logo />
+    </div>
+
     <div class="text-sm breadcrumbs m-0">
       <ul class="!p-0 !m-0">
         <li><a href="/">Home</a></li> 
-        <li><a href="/posts">My Blog</a></li> 
+        <li><a href="/posts">Posts</a></li> 
         <li>Post</li>
       </ul>
     </div>
