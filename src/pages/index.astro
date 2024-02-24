@@ -44,7 +44,7 @@ const allCreators = await getAllCreators();
         window.htmx.ajax('get', "/api/htmx-partials/get-meditations?searchQuery=" + this.searchQuery, {
           target: "#meditations-list",
           swap: "innerHTML",
-          indicator: "#spinner",
+          indicator: "#loading",
         })
       },
       init() {
