@@ -1,6 +1,5 @@
 ---
 import "../global.css";
-import ogImage from '../public/og-image.png';
 
 interface Props {
   title: string;
@@ -10,7 +9,7 @@ interface Props {
 }
 
 const domainUrl = "https://soulrest.melos.church";
-const { title, description, className, ogImageUrl = ogImage.src } = Astro.props;
+const { title, description, className, ogImageUrl = domainUrl + '/og-image.png' } = Astro.props;
 const descriptionToUse = description || "Soul Rest " + title;
 ---
 
