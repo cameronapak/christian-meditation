@@ -8,6 +8,9 @@ import { getAllCreators } from "../api/baserow/creators";
 const allMeditations = await getAllMeditations();
 const allCreators = await getAllCreators();
 
+// Randomize allMeditations.
+allMeditations.results.sort(() => Math.random() - 0.5);
+
 const cssGradients = [
   "bg-gradient-to-r from-blue-100 to-green-200 text-blue-800",
   "bg-gradient-to-l from-yellow-100 via-red-200 to-pink-200 text-yellow-800",
