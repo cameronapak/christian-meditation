@@ -1,3 +1,6 @@
+// @ts-nocheck
+// ☝️not great - https://github.com/withastro/astro/issues/8999
+
 // NOTE: Any time this config changes, make sure to turn off the server
 // and run `npx astro sync`.
 import { z, defineCollection } from "astro:content";
