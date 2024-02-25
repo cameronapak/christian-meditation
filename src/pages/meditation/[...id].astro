@@ -14,11 +14,15 @@ if (!id) {
 const meditation = await getMeditationById(id);
 const creator = await getCreatorById(meditation.Creator[0].id);
 
+const creatorName = creator?.Name || "";
+const creatorAvatarUrl = creator?.Avatar?.[0]?.url || "";
+const creatorWebsiteUrl = new URL(creator?.Website || "");
+
 if (!meditation) {
   return Astro.redirect("/");
 }
 
-const title = `${meditation.Title} | by ${creator.Name} | Christian Meditation on Soul Rest`;
+const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on Soul Rest`;
 ---
 
 <Layout className="bg-white" title={title} description={title}>
@@ -130,12 +134,33 @@ const title = `${meditation.Title} | by ${creator.Name} | Christian Meditation o
     </div>
     <iframe
       class="aspect-video w-full rounded-2xl shadow-lg bg-slate-100"
-      src={"https://www.youtube.com/embed/" + meditation["YouTube Video ID"] + "?rel=0"}
+      src={"https://www.youtube.com/embed/" +
+        meditation["YouTube Video ID"] +
+        "?rel=0"}
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen></iframe>
+    {
+      creatorName && creatorAvatarUrl ? (
+        <div class="mt-8 p-6 rounded-2xl bg-slate-100">
+          <div class="flex gap-3 items-center">
+            <img
+              class="m-0 w-10 h-10 rounded-full shadow-sm bg-cover object-cover"
+              src={creatorAvatarUrl || ""}
+              alt={creatorAvatarUrl}
+            />
 
+            <p class="m-0 text-xl">
+              Created by
+              <a class="link" href={creatorWebsiteUrl.href} target="_blank">
+                {creatorName}
+              </a>
+            </p>
+          </div>
+        </div>
+      ) : null
+    }
     <Footer />
   </main>
 </Layout>
