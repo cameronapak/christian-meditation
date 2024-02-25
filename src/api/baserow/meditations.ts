@@ -134,6 +134,15 @@ export async function getMeditationsByIds(ids: number[]): Promise<MeditationData
   //   throw error;
   // }
 
+  if (ids.includes(-1)) {
+    return {
+      count: 0,
+      next: '',
+      previous: null,
+      results: []
+    }
+  }
+
   console.warn('TODO for Cam - Figure out how to get meditations by ids using standard filter to save API calls.');
 
   const results = [];
