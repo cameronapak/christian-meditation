@@ -16,7 +16,7 @@ const creator = await getCreatorById(meditation.Creator[0].id);
 
 const creatorName = creator?.Name || "";
 const creatorAvatarUrl = creator?.Avatar?.[0]?.url || "";
-const creatorWebsiteUrl = new URL(creator?.Website || "https://soulrest.melos.church").href;
+const creatorWebsiteUrl = creator?.Website ? new URL(creator?.Website || "https://soulrest.melos.church")?.href || '' : '';
 
 if (!meditation) {
   return Astro.redirect("/");
