@@ -77,12 +77,12 @@ const allCreators = await getAllCreators();
     </p>
 
     {/* Filters */}
-    <div class="grid grid-cols-[auto_1fr] gap-2 items-center">
+    <div class="grid grid-cols-[1fr_auto] gap-2 items-center w-12/12 sm:w-8/12 md:w-6/12">
       <input
         x-on:input.debounce="search()"
         x-model="searchQuery"
         type="search"
-        placeholder="Search..."
+        placeholder="Search by title, creator, or duration"
         class="input input-bordered bg-white"
       />
 
