@@ -16,7 +16,7 @@ const creator = await getCreatorById(meditation.Creator[0].id);
 
 const creatorName = creator?.Name || "";
 const creatorAvatarUrl = creator?.Avatar?.[0]?.url || "";
-const creatorWebsiteUrl = new URL(creator?.Website || "");
+const creatorWebsiteUrl = new URL(creator?.Website || "https://soulrest.melos.church").href;
 
 if (!meditation) {
   return Astro.redirect("/");
@@ -153,7 +153,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
 
             <p class="m-0 text-xl">
               Created by
-              <a class="link" href={creatorWebsiteUrl.href} target="_blank">
+              <a class="link" href={creatorWebsiteUrl} target="_blank">
                 {creatorName}
               </a>
             </p>
