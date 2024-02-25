@@ -1,16 +1,26 @@
 ---
 import MeditationCard from "../../../components/MeditationCard.astro";
-import { getAllMeditations } from "../../../api/baserow/meditations";
+import { getAllMeditations, type MeditationData, getMeditationsByIds } from "../../../api/baserow/meditations";
 import { getAllCreators } from "../../../api/baserow/creators";
 
 const searchQuery = Astro.url.searchParams.get("searchQuery") || "";
+const idsParam = Astro.url.searchParams.get("ids[]") || '';
+
+const ids = idsParam ? idsParam.split(',').map?.((id) => Number(id)) || [Number(idsParam || '-1')] : [];
+let allMeditations: MeditationData;
 
 const getMeditationsParams: { search?: string } = {};
 if (searchQuery) {
   getMeditationsParams.search = searchQuery;
 }
 
-const allMeditations = await getAllMeditations(getMeditationsParams);
+const shouldFilterByIds = Boolean(ids.length);
+console.log(shouldFilterByIds, ids)
+if (shouldFilterByIds) {
+  allMeditations = await getMeditationsByIds(ids);
+} else {
+  allMeditations = await getAllMeditations(getMeditationsParams);
+}
 const allCreators = await getAllCreators();
 
 // https://docs.astro.build/en/basics/astro-pages/#page-partials
@@ -18,9 +28,9 @@ export const partial = true;
 ---
 
 {
-  allMeditations.results.map((result) => {
+  allMeditations?.results?.map((result) => {
     const creator = allCreators.results.find(
-      (creator) => creator.id === result.Creator[0].id,
+      (creator) => creator.id === result.Creator?.[0].id,
     );
 
     return (
@@ -36,7 +46,7 @@ export const partial = true;
 }
 
 {
-  !allMeditations.results.length ? (
+  !allMeditations?.results?.length ? (
     <section class="flex flex-col gap-0 p-6 border border-gray-200 border-dashed rounded-2xl items-center justify-center  h-full w-full aspect-video">
       <svg
         xmlns="http://www.w3.org/2000/svg"
