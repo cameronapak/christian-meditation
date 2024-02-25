@@ -21,7 +21,6 @@ if (searchQuery) {
 }
 
 const shouldFilterByIds = Boolean(ids.length);
-console.log(shouldFilterByIds, ids);
 if (shouldFilterByIds) {
   allMeditations = await getMeditationsByIds(ids);
 } else {
