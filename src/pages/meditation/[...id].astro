@@ -132,7 +132,12 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
       <div class="text-sm breadcrumbs m-0">
         <ul class="!p-0 !m-0">
           <li><a href="/">Home</a></li>
-          <li>{meditation.Title} <p class="m-0 ml-2 badge bg-slate-100 border-none">~{meditation.Duration.value}</p></li> 
+          <li>
+            {meditation.Title}
+            <p class="m-0 ml-2 badge bg-slate-100 border-none">
+              ~{meditation.Duration.value}
+            </p>
+          </li>
         </ul>
       </div>
     </div>
@@ -160,17 +165,23 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
             isPlaying: false,
             handleClick() { 
               this.isPlaying = !this.isPlaying;
+              this.hasClickedPlay = true;
               if (this.isPlaying) {
                 $refs.audioEl.play();
               } else {
                 $refs.audioEl.pause();
               }
             },
+            hasClickedPlay: false,
             goForwards15Seconds() {
-              $refs.audioEl?.currentTime += 15;
+              if ($refs.audioEl?.currentTime) {
+                $refs.audioEl.currentTime += 15;
+              }
             },
             goBackwards15Seconds() {
-              $refs.audioEl?.currentTime -= 15;
+              if ($refs.audioEl?.currentTime) {
+                $refs.audioEl.currentTime -= 15;
+              }
             },
             updateAudioProgress() {
               const percentage = Math.floor($refs.audioEl.currentTime / $refs.audioEl.duration * 100) || 0;
@@ -244,8 +255,10 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
                 />
               </svg>
               <div
+                x-cloak
+                x-show="hasClickedPlay"
                 x-ref="radialProgressEl"
-                class="absolute radial-progress scale-125"
+                class="absolute radial-progress scale-[120%]"
                 role="progressbar"
               />
             </button>
