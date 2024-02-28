@@ -7,23 +7,7 @@ interface Props {
   creatorAvatarUrl?: string;
 }
 
-const cssGradients = [
-  "bg-gradient-to-r from-blue-100 to-green-200 text-blue-800",
-  "bg-gradient-to-l from-yellow-100 via-red-200 to-pink-200 text-yellow-800",
-  "bg-gradient-to-br from-purple-200 via-pink-200 to-red-100 text-purple-800",
-  "bg-gradient-to-t from-green-100 via-blue-200 to-indigo-200 text-green-800",
-  "bg-gradient-to-b from-yellow-50 via-orange-100 to-red-200 text-yellow-900",
-  "bg-gradient-to-tr from-pink-100 via-purple-200 to-indigo-300 text-pink-800",
-  "bg-gradient-to-bl from-blue-100 via-purple-200 to-pink-100 text-blue-800",
-  "bg-gradient-to-r from-yellow-50 via-green-100 to-teal-200 text-yellow-900",
-  "bg-gradient-to-l from-red-100 via-yellow-50 to-green-100 text-red-800",
-  "bg-gradient-to-t from-indigo-100 via-blue-200 to-cyan-300 text-indigo-800",
-  "bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 text-gray-800",
-  "bg-gradient-to-tr from-red-100 via-yellow-50 to-green-100 text-red-800",
-  "bg-gradient-to-bl from-teal-100 via-blue-200 to-indigo-300 text-teal-800",
-  "bg-gradient-to-r from-pink-50 via-purple-100 to-indigo-200 text-pink-800",
-  "bg-gradient-to-l from-green-50 via-teal-100 to-blue-200 text-green-800",
-];
+import { cssGradients } from '../utils/constants';
 
 const { id, title, duration, creatorName, creatorAvatarUrl } = Astro.props;
 

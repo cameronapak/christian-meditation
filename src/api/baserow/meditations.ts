@@ -12,12 +12,13 @@ export interface Result {
   order: string
   Title: string
   Notes: string
-  "YouTube Video URL": string
+  "YouTube Video URL"?: string
   Creator: Creator[]
   Duration: Duration
-  "YouTube Video ID": string
-  "Thumbnail URL": string
-  "Meditation Id": string | number
+  "YouTube Video ID"?: string
+  "Thumbnail URL"?: string
+  "Audio File URL": string;
+  "Meditation Id": string | number;
 }
 
 export interface Creator {
