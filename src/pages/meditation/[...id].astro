@@ -188,7 +188,14 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
               $refs.radialProgressEl.style.setProperty('--value', percentage.toString());
             },
             init() {
-              setInterval(this.updateAudioProgress, 1000);
+              const myInterval = setInterval(this.updateAudioProgress, 1000);
+              
+              // When I leave the page, disable the interval.
+              window.addEventListener('swup:page:view', function(event) {
+                clearInterval(myInterval);
+              }, {
+                once: true
+              });
             }
           }`}
           x-on:keyup.space.window="handleClick()"
