@@ -11,8 +11,20 @@
 .prose h4, 
 .prose h5, 
 .prose h6 {
-  @apply my-2;
+  @apply my-2 dark:text-slate-200;
   text-wrap: balance;
+}
+
+.prose a {
+  @apply dark:text-slate-200;
+}
+
+.prose blockquote {
+  @apply dark:text-slate-300 dark:!border-slate-400;
+}
+
+.prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker {
+  @apply dark:text-slate-300;
 }
 
 .balanced {
@@ -30,3 +42,4 @@
 [x-cloak] {
   display: none;
 }
+

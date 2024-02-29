@@ -14,7 +14,7 @@ const descriptionToUse = description || "Soul Rest " + title;
 ---
 
 <!doctype html>
-<html class="bg-white dark:bg-gray-800 dark" lang="en">
+<html class="bg-white dark:bg-slate-800 dark" lang="en">
   <head>
     <title>{title}</title>
     <meta charset="UTF-8" />
@@ -62,7 +62,7 @@ const descriptionToUse = description || "Soul Rest " + title;
     <link rel="manifest" href="/site.webmanifest" />
   </head>
 
-  <body class={"prose !max-w-[100vw] w-full overflow-x-hidden " + className}>
+  <body class={"prose !max-w-[100vw] w-full overflow-x-hidden dark:bg-slate-800 dark:!text-slate-100 " + className}>
     <slot />
   </body>
 </html>

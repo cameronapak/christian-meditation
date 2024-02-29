@@ -27,9 +27,9 @@ if (!meditation) {
 const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on Soul Rest`;
 ---
 
-<Layout className="bg-white" title={title} description={title}>
+<Layout className="bg-white dark:bg-slate-800 dark:!text-slate-100" title={title} description={title}>
   <main class="container p-6 outline-none">
-    <div class="flex gap-2 sticky top-0 py-2 bg-white z-20 items-center">
+    <div class="flex gap-2 sticky top-0 py-2 dark:bg-slate-800 bg-white z-20 items-center">
       <div class="w-full">
         <Logo />
       </div>
@@ -66,8 +66,8 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
         {/* Favorite Button */}
         <div class="tooltip tooltip-left" data-tip="Favorite this Meditation">
           <button
-            x-bind:class="{ 'text-red-700 bg-red-100 border-red-100 hover:bg-red-700 hover:border-red-700 hover:text-red-100': isFavorite }"
-            class="btn btn-circle btn-outline border-gray-300 rounded-full btn-sm"
+            x-bind:class="{ 'text-red-700 bg-red-100 border-red-100 hover:bg-red-700 hover:border-red-700 hover:text-red-100 dark:text-red-200 dark:bg-red-900 dark:border-red-900': isFavorite }"
+            class="btn dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-600 btn-circle btn-outline border-gray-300 rounded-full btn-sm"
             x-on:click={`toggleMeditationFavorite(${meditation.id})`}
           >
             <svg
@@ -104,7 +104,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
         <div class="tooltip tooltip-left" data-tip="Share this Meditation">
           <button
             x-data
-            class="btn btn-circle btn-outline border-gray-300 rounded-full btn-sm"
+            class="btn btn-circle btn-outline dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-600 border-gray-300 rounded-full btn-sm"
             x-on:click="shareMeditation()"
           >
             <svg
@@ -128,13 +128,13 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
     </div>
 
     {/* Breadcrumbs */}
-    <div class="flex flex-col gap-0">
+    <div class="flex flex-col gap-0 dark:text-slate-200">
       <div class="text-sm breadcrumbs m-0">
         <ul class="!p-0 !m-0">
-          <li><a href="/">Home</a></li>
+          <li><a href="/" class="dark:text-slate-200">Home</a></li>
           <li>
             {meditation.Title}
-            <p class="m-0 ml-2 badge bg-slate-100 border-none">
+            <p class="m-0 ml-2 badge bg-slate-100 border-none dark:text-slate-200 dark:bg-slate-700">
               ~{meditation.Duration.value}
             </p>
           </li>
@@ -297,7 +297,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
 
     {
       creatorName && creatorAvatarUrl ? (
-        <div class="mt-8 p-6 rounded-2xl bg-slate-100">
+        <div class="mt-8 p-6 rounded-2xl bg-slate-100 dark:bg-slate-700">
           <div class="flex gap-3 items-center">
             <img
               class="m-0 w-10 h-10 rounded-full shadow-sm bg-cover object-cover"
@@ -308,7 +308,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
 
             <p class="m-0 text-xl">
               Created by
-              <a class="link" href={creatorWebsiteUrl} target="_blank">
+              <a class="link dark:text-slate-200" href={creatorWebsiteUrl} target="_blank">
                 {creatorName}
               </a>
             </p>
