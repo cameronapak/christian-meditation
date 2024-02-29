@@ -9,12 +9,22 @@ interface Props {
 }
 
 const domainUrl = "https://soulrest.melos.church";
-const { title, description, className, ogImageUrl = domainUrl + '/og-image.png' } = Astro.props;
+const {
+  title,
+  description,
+  className,
+  ogImageUrl = domainUrl + "/og-image.png",
+} = Astro.props;
 const descriptionToUse = description || "Soul Rest " + title;
 ---
 
 <!doctype html>
-<html class="bg-white dark:bg-slate-800 dark" lang="en">
+<html
+  class="bg-slate-800 dark:bg-slate-800 transition duration-300 ease-in-out"
+  x-bind:class="isDarkModeEnabled ? 'dark' : 'bg-white'"
+  x-data="{ isDarkModeEnabled: $persist(false) }"
+  lang="en"
+>
   <head>
     <title>{title}</title>
     <meta charset="UTF-8" />
@@ -23,36 +33,21 @@ const descriptionToUse = description || "Soul Rest " + title;
     <meta name="generator" content={Astro.generator} />
 
     <!-- HTML Meta Tags -->
-    <meta
-      name="description"
-      content={descriptionToUse}
-    />
+    <meta name="description" content={descriptionToUse} />
 
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content={domainUrl} />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content={title}
-    />
-    <meta
-      property="og:description"
-      content={descriptionToUse}
-    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={descriptionToUse} />
     <meta property="og:image" content={ogImageUrl} />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:domain" content={domainUrl} />
     <meta property="twitter:url" content={domainUrl} />
-    <meta
-      name="twitter:title"
-      content={title}
-    />
-    <meta
-      name="twitter:description"
-      content={descriptionToUse}
-    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={descriptionToUse} />
     <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
@@ -62,13 +57,16 @@ const descriptionToUse = description || "Soul Rest " + title;
     <link rel="manifest" href="/site.webmanifest" />
   </head>
 
-  <body class={"prose !max-w-[100vw] w-full overflow-x-hidden dark:bg-slate-800 dark:!text-slate-100 " + className}>
+  <body
+    class={"prose !max-w-[100vw] w-full overflow-x-hidden dark:bg-slate-800 dark:!text-slate-100 " +
+      className}
+  >
     <slot />
   </body>
 </html>
 
 <script>
-  import * as htmx from 'htmx.org';
+  import * as htmx from "htmx.org";
 
   window.htmx = htmx;
 </script>

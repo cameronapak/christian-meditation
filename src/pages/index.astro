@@ -68,10 +68,35 @@ const allCreators = await getAllCreators();
       },
     }`}
   >
-    <progress class="fixed top-0 left-0 right-0 progress htmx-indicator p-0 m-0 dark:invert"
+    <progress
+      class="fixed top-0 left-0 right-0 progress htmx-indicator p-0 m-0 dark:invert"
     ></progress>
-    <div class="flex flex-col gap-2 sticky top-0 py-2 bg-white dark:bg-slate-800 z-20">
+    <div
+      class="grid grid-cols-[1fr_auto] items-center gap-2 sticky top-0 py-2 bg-white dark:bg-slate-800 z-20"
+    >
       <Logo />
+      <div
+        class="tooltip tooltip-left"
+        x-bind:data-tip="isDarkModeEnabled ? 'Turn on Light Mode' : 'Turn on Dark Mode"
+      >
+        <button
+          x-data
+          class="btn btn-circle btn-outline dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-600 border-gray-300 rounded-full btn-sm"
+          @click="isDarkModeEnabled = !isDarkModeEnabled"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="m15.844 3.344l-1.428.781l1.428.781l.781 1.428l.781-1.428l1.428-.781l-1.428-.781l-.781-1.428l-.781 1.428Zm-5.432.814A8 8 0 1 0 18.93 16A9 9 0 0 1 10 7c0-.98.131-1.937.412-2.842ZM2 12C2 6.477 6.477 2 12 2h1.734l-.868 1.5C12.287 4.5 12 5.69 12 7a7 7 0 0 0 8.348 6.87l1.682-.327l-.543 1.626C20.162 19.137 16.417 22 12 22C6.477 22 2 17.523 2 12Zm18.5-5.584l.914 1.67l1.67.914l-1.67.914l-.914 1.67l-.914-1.67L17.916 9l1.67-.914l.914-1.67Z"
+            ></path>
+          </svg>
+        </button>
+      </div>
     </div>
     <p class="balanced max-w-[65ch] m-0 py-2 dark:text-slate-200">
       Find peace of heart and mind no matter your circumstance.
