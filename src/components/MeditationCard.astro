@@ -17,7 +17,7 @@ const randomBgColor = cssGradients[Number(id || 0) % cssGradients.length];
 
 <li class="p-0 m-0">
   <a
-    class={`relative h-full w-full p-6 cursor-pointer flex flex-col gap-4 transition active:scale-95 duration-300 aspect-video bg-red-100 rounded-2xl items-center justify-center no-underline ${randomBgColor}`}
+    class={`relative h-full w-full p-6 cursor-pointer flex flex-col gap-4 transition active:scale-95 duration-300 aspect-video bg-red-100 rounded-2xl items-center justify-center no-underline dark:bg-blend-darken ${randomBgColor}`}
     href={`/meditation/${id}`}
   >
     <p

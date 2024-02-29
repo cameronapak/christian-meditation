@@ -10,6 +10,10 @@ export default {
 			},
 		},
 	},
+	// https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
+	// For dark mode to work now, you must apply the .dark class to a parent
+	// HTML element. All children classes will be dark mode.
+	darkMode: 'selector',
 	// Change your theme at https://daisyui.com/docs/themes/.
 	daisyui: {
 		themes: ["retro"]
