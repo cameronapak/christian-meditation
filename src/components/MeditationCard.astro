@@ -7,7 +7,7 @@ interface Props {
   creatorAvatarUrl?: string;
 }
 
-import { cssGradients } from '../utils/constants';
+import { cssGradients } from "../utils/constants";
 
 const { id, title, duration, creatorName, creatorAvatarUrl } = Astro.props;
 
@@ -15,7 +15,13 @@ const { id, title, duration, creatorName, creatorAvatarUrl } = Astro.props;
 const randomBgColor = cssGradients[Number(id || 0) % cssGradients.length];
 ---
 
-<li class="p-0 m-0">
+<li
+  x-data="{ shown: false }"
+  class="transition-opacity duration-500 opacity-0 p-0 m-0"
+  x-bind:class="shown ? 'opacity-100' : ''"
+  x-intersect:enter="shown = true"
+  x-intersect:leave="shown = false"
+>
   <a
     class={`relative h-full w-full p-6 cursor-pointer flex flex-col gap-4 transition active:scale-95 duration-300 aspect-video bg-red-100 rounded-2xl items-center justify-center no-underline dark:bg-blend-darken ${randomBgColor}`}
     href={`/meditation/${id}`}
@@ -25,7 +31,9 @@ const randomBgColor = cssGradients[Number(id || 0) % cssGradients.length];
     >
       {title}
     </p>
-    <div class="badge glass absolute bottom-2 right-2 dark:bg-white dark:bg-opacity-10 dark:bg-blend-darken dark:text-white">
+    <div
+      class="badge glass absolute bottom-2 right-2 dark:bg-white dark:bg-opacity-10 dark:bg-blend-darken dark:text-white"
+    >
       {duration}
     </div>
     {
