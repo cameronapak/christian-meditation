@@ -1,3 +1,9 @@
 {
-  "frontMatter.content.pageFolders": []
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "Posts",
+      "path": "[[workspace]]/src/content/posts",
+      "excludeSubdir": true,
+    },
+  ]
 }
