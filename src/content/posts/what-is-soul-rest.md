@@ -30,11 +30,11 @@ When I was at the peak of my chronic sickness, Christian meditations based on th
 
 I could be in the hardest point in my life but still be able to breathe lightly because I was learning to be content and be still, with God. 
 
-God is enough.
+That's when I found the power of Biblically-based Christian meditations and meditative prayers. Those tools helped me find joy and connection with God in the hardest time of my life.
 
-He is what you need.
+I learned that God is enough. He is what you need.
 
-[Try Soul Rest today](/)! It's 100% free
+If you're going through some hard times, I recommend you [try Soul Rest today](/)! It's 100% free.
 
 ---
 
