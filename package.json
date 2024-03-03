@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "update-collection-types": "astro sync",
-    "install-sentry": "astro add @sentry/astro"
+    "install-sentry": "astro add @sentry/astro",
+    "rss-import": "node ./src/scripts/parse-rss.js" 
   },
   "dependencies": {
     "@alpinejs/intersect": "^3.13.5",

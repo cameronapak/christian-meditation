@@ -4,10 +4,10 @@ export interface MeditationData {
   count: number
   next: string
   previous: any
-  results: Result[]
+  results: Meditation[]
 }
 
-export interface Result {
+export interface Meditation {
   id: number
   order: string
   Title: string
@@ -87,8 +87,8 @@ export async function getMeditationsByCreatorId(id: number): Promise<MeditationD
   return meditations
 }
 
-export async function getMeditationById(id: string): Promise<Result> {
-  const meditation: Result = await fetchAndCache({
+export async function getMeditationById(id: string): Promise<Meditation> {
+  const meditation: Meditation = await fetchAndCache({
     url: `https://api.baserow.io/api/database/rows/table/259238/${id}/?user_field_names=true`,
     cacheKey: `meditation-${id}`,
     options: {
