@@ -1,15 +1,4 @@
-// TODO - WORK IN PROGRESS
-// This is where I will parse an RSS feed to extract the 
-// following from the feed:
-// - Title
-// - Link
-// - Description
-// - Date
-// - Author
-// - Image 
-// - Duration
-// - Tags
-// - Category
+import { type Creator } from '../src/api/baserow/creators';
 
 // const getPodcastFromFeed = require("podparse")
 import getPodcastFromFeed from "podparse"
