@@ -4,7 +4,7 @@ export interface CreatorData {
   count: number
   next: string
   previous: any
-  Creators: Creator[]
+  results: Creator[]
 }
 
 export interface Creator {
