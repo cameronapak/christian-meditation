@@ -6,6 +6,7 @@ const podcastFeedXMLText = await podcastFeedXML;
 const podcast = getPodcastFromFeed(podcastFeedXMLText);
 const adminNote = `From RSS feed on ${(new Date()).toLocaleString()} - contact is ${podcast.meta.owner.name} at ${podcast.meta.owner.email} or ${podcast.meta.managingEditor}.`;
 
+// TODO - make this match the Baserow way to do durations.
 function getEstimateDuration(minutes) {
 	if (!minutes) {
 		return null;
@@ -46,3 +47,19 @@ function getPodcasts() {
 	})
 }
 
+// TODO
+//
+// Check if Creator exists in Baserow.
+// - if not, add them.
+//   - then, keep the Baserow id.
+// - if they do, great, keep the Baserow id for them.
+//
+// // Instead of trying to store date of when I last parsed the 
+// // episodes, instead just wipe and replace all.
+// 
+// Get all episodes from that Creator's Baserow data.
+// Map over every single episode from the RSS feed
+// and see if there are any episodes that match in title
+// or episode audio listen URL.
+// - if episode matches existing one, skip it.
+// - if not, then add the new episode!
