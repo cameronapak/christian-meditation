@@ -4,20 +4,22 @@ export interface CreatorData {
   count: number
   next: string
   previous: any
-  results: Result[]
+  Creators: Creator[]
 }
 
-export interface Result {
+export interface Creator {
   id: number
   order: string
   Name: string
-  "Admin Notes": string
-  "YouTube Channel": string
+  "Admin Notes"?: string
+  "YouTube Channel"?: string
   Avatar: Avatar[]
   "Short Description": string
   Website: string
   Approved: boolean
   Meditations: Meditation[]
+  "RSS Feed": string
+  Official: boolean
 }
 
 export interface Avatar {
@@ -77,8 +79,8 @@ export async function getAllCreators({
   return creators
 }
 
-export async function getCreatorById(id: number): Promise<Result> {
-  const creator: Result = await fetchAndCache({
+export async function getCreatorById(id: number): Promise<Creator> {
+  const creator: Creator = await fetchAndCache({
     url: `https://api.baserow.io/api/database/rows/table/259237/${id}/?user_field_names=true`,
     options: {
       method: "GET",
