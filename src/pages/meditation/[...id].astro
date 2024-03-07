@@ -193,6 +193,10 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
                 this.isPlaying = false;
               }
             },
+            remainingTime() {
+              console.log('how many times is this called?')
+              return Math.floor($refs.audioEl.duration - $refs.audioEl.currentTime);
+            },
             setUpAudioProgressInterval() {
               if (!this.audioProgressInterval) {
                 this.audioProgressInterval = setInterval(this.updateAudioProgress, 500);
@@ -210,7 +214,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
 
               $nextTick(() => {
                 // When I leave the page, disable the interval.
-                window.addEventListener('swup:page:view', function(event) {
+                window.addEventListener('swup:page:view', () => {
                   this.tearDownAudioProgressInterval();
                 }, {
                   once: true
