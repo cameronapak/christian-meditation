@@ -93,3 +93,26 @@ export async function getCreatorById(id: number): Promise<Creator> {
 
   return creator
 }
+
+// export async function createNewCreator(): Promise<Creator> {
+//   const newCreator: Creator = await fetch('')
+// }
+
+export async function getDoesThisCreatorExist(creatorQuery: string): Promise<Creator | null> {
+  const creator: { results: Creator[], count: number } = await fetchAndCache({
+    url: "https://api.baserow.io/api/database/rows/table/259237/?user_field_names=true&size=1&search=" + encodeURIComponent(creatorQuery),
+    options: {
+      method: "GET",
+      headers: {
+        Authorization: 'Token ' + import.meta.env.BASEROW_API_KEY,
+      }
+    },
+    cacheKey: `creator-${encodeURIComponent(creatorQuery)}`
+  })
+
+  if (!creator.count) {
+    return null
+  }
+
+  return creator.results[0]
+}

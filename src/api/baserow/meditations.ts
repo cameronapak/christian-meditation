@@ -67,15 +67,26 @@ export async function getAllMeditations({
   return meditations
 }
 
-export async function getMeditationsByCreatorId(id: number): Promise<MeditationData> {
-  const baseUrl = new URL('https://api.baserow.io/api/database/rows/table/259238/?user_field_names=true');
+export async function getMeditationsByCreatorId({ id, size, query }: { id: number | string, size?: number, query?: string }): Promise<MeditationData | null> {
+  if (id === -1) {
+    return null;
+  }
 
-  const filter = { "filter_type": "AND", "filters": [{ "type": "link_row_has", "field": "Creator", "value": id }], "groups": [] };
-  baseUrl.searchParams.set('user_field_names', encodeURIComponent(JSON.stringify(filter)));
+  const baseUrl = new URL('https://api.baserow.io/api/database/rows/table/259238/');
+
+  baseUrl.searchParams.set('user_field_names', 'true');
+  const filters = { "filter_type": "AND", "filters": [{ "type": "link_row_has", "field": "Creator", "value": "14" }, ], "groups": [] }
+  if (query) {
+    filters['filters'].push({ "type": "contains", "field": "Title", "value": query });
+  }
+  baseUrl.searchParams.set('filters', JSON.stringify(filters));
+  if (size) {
+    baseUrl.searchParams.set('size', size.toString());
+  }
 
   const meditations: MeditationData = await fetchAndCache({
     url: baseUrl.href,
-    cacheKey: `meditations-${id}`,
+    cacheKey: `meditations-${id}-${query}-${size}`,
     options: {
       method: "GET",
       headers: {
@@ -157,4 +168,65 @@ export async function getMeditationsByIds(ids: number[]): Promise<MeditationData
   }
 
   return { results } as MeditationData;
+}
+
+export const DURATIONS = {
+  '~5 min': 1362559,
+  '~10 min': 1362560,
+  '~15 min': 1362562,
+  '~20 min': 1362563,
+  '~30 min+': 1362564,
+}
+
+function pickDurationIdFromSeconds(seconds: number) {
+  // if less than 6.5 minutes, then it's around 5 min
+  if (seconds < 6.5 * 60) {
+    return DURATIONS['~5 min'];
+  } else if (seconds < 12 * 60) {
+    return DURATIONS['~10 min'];
+  } else if (seconds < 17 * 60) {
+    return DURATIONS['~15 min'];
+  } else if (seconds < 25 * 60) {
+    return DURATIONS['~20 min'];
+  } else {
+    return DURATIONS['~30 min+'];
+  }
+}
+
+export async function createMeditation({
+  title,
+  adminNotes,
+  creatorId,
+  durationInSeconds,
+  audioFileUrl,
+}: {
+  title: string,
+  adminNotes: string,
+  creatorId: number,
+  durationInSeconds: number,
+  audioFileUrl: string
+}): Promise<Meditation> {
+  const baseUrl = new URL('https://api.baserow.io/api/database/rows/table/259238/?user_field_names=true');
+
+  const response = await fetch(baseUrl, {
+    method: "POST",
+    headers: {
+      Authorization: 'Token ' + import.meta.env.BASEROW_API_KEY,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      "Title": title,
+      "Notes": adminNotes,
+      "YouTube Video URL": "",
+      "Creator": [
+        creatorId
+      ],
+      "Duration": pickDurationIdFromSeconds(durationInSeconds),
+      "Audio File URL": audioFileUrl
+    })
+  })
+
+  const data = await response.json();
+
+  return data;
 }

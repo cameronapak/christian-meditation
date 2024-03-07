@@ -1,5 +1,7 @@
 import fs from 'fs'
 import getPodcastFromFeed from "podparse"
+import { getDoesThisCreatorExist } from "../api/baserow/creators";
+import { createMeditation, getMeditationsByCreatorId } from '../api/baserow/meditations';
 
 const podcastFeedXML = fs.readFileSync('./src/scripts/example.xml', 'utf-8');
 const podcastFeedXMLText = await podcastFeedXML;
@@ -7,7 +9,7 @@ const podcast = getPodcastFromFeed(podcastFeedXMLText);
 const adminNote = `From RSS feed on ${(new Date()).toLocaleString()} - contact is ${podcast.meta.owner.name} at ${podcast.meta.owner.email} or ${podcast.meta.managingEditor}.`;
 
 // TODO - make this match the Baserow way to do durations.
-function getEstimateDuration(minutes) {
+function getEstimateDuration(minutes: number) {
 	if (!minutes) {
 		return null;
 	} else if (minutes < 7) {
@@ -31,7 +33,7 @@ function getPodcastCreator() {
 		"Admin Notes": adminNote,
 		Website: podcast.meta.link,
 		Approved: true,
-		"RSS Feed": podcast.meta.links.find((link) => link.rel === 'self').href,
+		"RSS Feed": podcast.meta.links.find((link) => link.rel === 'self')?.href || '',
 	};
 }
 
@@ -45,6 +47,31 @@ function getPodcasts() {
 		};
 		return episodeMeditation;
 	})
+}
+
+const podcastCreator = getPodcastCreator();
+const creator = await getDoesThisCreatorExist(podcastCreator.Name);
+const podcasts = getPodcasts();
+
+for (let i = 0; i < podcasts.length; i += 1) {
+	// Does meditation exist? 
+	const podcast = podcasts[i];
+	const doesMeditationExist = await getMeditationsByCreatorId({ id: creator?.id || -1, size: 1, query: podcast.Title });
+	console.log('Checking if podcast exists: ' + podcast.Title);
+	if (!doesMeditationExist?.count) {
+		console.log('Podcast does not exist. Adding...')
+		const meditation = await createMeditation({
+			title: podcast.Title,
+			adminNotes: podcastCreator["Admin Notes"],
+			creatorId: creator?.id || -1,
+			durationInSeconds: 0,
+			audioFileUrl: podcast["Audio File URL"] || '',
+		});
+		console.log('Added meditation ☑️');
+	} else {
+		console.log('Podcast exists. Skipping...')
+	}
+	await new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
 // TODO
@@ -63,3 +90,4 @@ function getPodcasts() {
 // or episode audio listen URL.
 // - if episode matches existing one, skip it.
 // - if not, then add the new episode!
+
