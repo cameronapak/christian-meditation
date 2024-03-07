@@ -39,6 +39,8 @@ export async function getAllMeditations({
   randomize = true
 }: { search?: string, creatorId?: number, randomize?: boolean } = {}): Promise<MeditationData> {
   const baseUrl = new URL('https://api.baserow.io/api/database/rows/table/259238/?user_field_names=true');
+  const SIZE = 200;
+  baseUrl.searchParams.set('size', SIZE.toString());
 
   if (search) {
     baseUrl.searchParams.set('search', search);
@@ -51,7 +53,7 @@ export async function getAllMeditations({
 
   const meditations: MeditationData = await fetchAndCache({
     url: baseUrl.href,
-    cacheKey: `meditations-all-${search}-${creatorId}`,
+    cacheKey: `meditations-all-${search}-${creatorId}-${SIZE}`,
     options: {
       method: "GET",
       headers: {
@@ -59,6 +61,8 @@ export async function getAllMeditations({
       },
     }
   })
+
+  console.log(meditations)
 
   if (randomize) {
     meditations.results.sort(() => Math.random() - 0.5);
