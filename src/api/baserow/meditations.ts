@@ -62,8 +62,6 @@ export async function getAllMeditations({
     }
   })
 
-  console.log(meditations)
-
   if (randomize) {
     meditations.results.sort(() => Math.random() - 0.5);
   }
