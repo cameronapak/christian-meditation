@@ -167,8 +167,10 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
               this.isPlaying = !this.isPlaying;
               this.hasClickedPlay = true;
               if (this.isPlaying) {
+                this.setUpAudioProgressInterval();
                 $refs.audioEl.play();
               } else {
+                this.tearDownAudioProgressInterval();
                 $refs.audioEl.pause();
               }
             },
@@ -186,16 +188,34 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
             updateAudioProgress() {
               const percentage = Math.floor($refs.audioEl.currentTime / $refs.audioEl.duration * 100) || 0;
               $refs.radialProgressEl.style.setProperty('--value', percentage.toString());
+              if (percentage === 100) {
+                this.tearDownAudioProgressInterval();
+                this.isPlaying = false;
+              }
             },
+            setUpAudioProgressInterval() {
+              if (!this.audioProgressInterval) {
+                this.audioProgressInterval = setInterval(this.updateAudioProgress, 500);
+              }
+            },
+            tearDownAudioProgressInterval() {
+              if (this.audioProgressInterval) {
+                clearInterval(this.audioProgressInterval);
+                this.audioProgressInterval = null;
+              }
+            },
+            audioProgressInterval: null,
             init() {
-              const myInterval = setInterval(this.updateAudioProgress, 1000);
-              
-              // When I leave the page, disable the interval.
-              window.addEventListener('swup:page:view', function(event) {
-                clearInterval(myInterval);
-              }, {
-                once: true
-              });
+              this.setUpAudioProgressInterval();
+
+              $nextTick(() => {
+                // When I leave the page, disable the interval.
+                window.addEventListener('swup:page:view', function(event) {
+                  this.tearDownAudioProgressInterval();
+                }, {
+                  once: true
+                });
+              })
             }
           }`}
           x-on:keyup.space.window="handleClick()"
@@ -290,7 +310,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
             </button>
           </div>
 
-          <audio x-ref="audioEl" src={meditation["Audio File URL"]} />
+          <audio x-ref="audioEl" x-on:ended="this.isPlaying = false" src={meditation["Audio File URL"]} />
         </div>
       ) : null
     }
