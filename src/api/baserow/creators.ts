@@ -116,3 +116,47 @@ export async function getDoesThisCreatorExist(creatorQuery: string): Promise<Cre
 
   return creator.results[0]
 }
+
+export async function createRssPodcastCreator({
+  name, 
+  adminNotes, 
+  avatarImageUrl, 
+  shortDescription,
+  website,
+  rssFeedUrl,
+}: {
+  name: string,
+  adminNotes: string,
+  avatarImageUrl: string,
+  shortDescription: string,
+  website: string,
+  rssFeedUrl: string
+}): Promise<Creator> {
+
+  const response = await fetch('https://api.baserow.io/api/database/rows/table/259237/?user_field_names=true', {
+    method: "POST",
+    headers: {
+      Authorization: 'Token ' + import.meta.env.BASEROW_API_KEY,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      "Name": name,
+      "Admin Notes": adminNotes,
+      "YouTube Channel": "",
+      "Avatar": [
+        {
+          "name": avatarImageUrl,
+        }
+      ],
+      "Short Description": shortDescription,
+      "Website": website,
+      "Approved": true,
+      "Official": false,
+      "RSS Feed": rssFeedUrl
+    })
+  })
+
+  const data = await response.json()
+
+  return data;
+}
