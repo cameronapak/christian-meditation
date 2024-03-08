@@ -27,9 +27,15 @@ if (!meditation) {
 const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on Soul Rest`;
 ---
 
-<Layout className="bg-white dark:bg-slate-800 dark:!text-slate-100" title={title} description={title}>
+<Layout
+  className="bg-white dark:bg-slate-800 dark:!text-slate-100"
+  title={title}
+  description={title}
+>
   <main class="container p-6 outline-none">
-    <div class="flex gap-2 sticky top-0 py-2 dark:bg-slate-800 bg-white z-20 items-center">
+    <div
+      class="flex gap-2 sticky top-0 py-2 dark:bg-slate-800 bg-white z-20 items-center"
+    >
       <div class="w-full">
         <Logo />
       </div>
@@ -67,7 +73,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
         <div class="tooltip tooltip-left" data-tip="Favorite this Meditation">
           <button
             x-bind:class="{ 'text-red-700 bg-red-100 border-red-100 hover:bg-red-700 hover:border-red-700 hover:text-red-100 dark:text-red-200 dark:bg-red-900 dark:border-red-900': isFavorite }"
-            class="btn dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-600 btn-circle btn-outline border-gray-300 rounded-full btn-sm"
+            class="btn btn-sm btn-circle btn-outline dark:border-slate-600 text-slate-500 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-500 dark:hover:border-slate-400 border-slate-300"
             x-on:click={`toggleMeditationFavorite(${meditation.id})`}
           >
             <svg
@@ -104,7 +110,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
         <div class="tooltip tooltip-left" data-tip="Share this Meditation">
           <button
             x-data
-            class="btn btn-circle btn-outline dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-600 border-gray-300 rounded-full btn-sm"
+            class="btn btn-sm btn-circle btn-outline dark:border-slate-600 text-slate-500 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-500 dark:hover:border-slate-400 border-slate-300"
             x-on:click="shareMeditation()"
           >
             <svg
@@ -134,7 +140,9 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
           <li><a href="/" class="dark:text-slate-200">Home</a></li>
           <li>
             {meditation.Title}
-            <p class="m-0 ml-2 badge bg-slate-100 border-none dark:text-slate-200 dark:bg-slate-700">
+            <p
+              class="m-0 ml-2 badge bg-slate-100 border-none dark:text-slate-200 dark:bg-slate-700"
+            >
               ~{meditation.Duration.value}
             </p>
           </li>
@@ -232,7 +240,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
           <div class="flex justify-center items-center gap-4">
             <button
               x-on:click="goBackwards15Seconds()"
-              class="btn btn-circle btn-outline border-slate-200 dark:border-gray-600 dark:hover:bg-slate-600 dark:text-slate-200 border-gray-300 hover:bg-inherit hover:border-inherit rounded-full btn-md"
+              class="btn btn-circle btn-outline dark:border-slate-600 text-slate-500 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-500 dark:hover:border-slate-400 border-slate-300"
               aria-label="Go back 15 seconds"
             >
               <svg
@@ -296,7 +304,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
 
             <button
               x-on:click="goForwards15Seconds()"
-              class="btn btn-circle btn-outline border-slate-200 dark:border-gray-600 dark:hover:bg-slate-600 dark:text-slate-200 border-gray-300 hover:bg-inherit hover:border-inherit rounded-full btn-md"
+              class="btn btn-circle btn-outline dark:border-slate-600 text-slate-500 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-500 dark:hover:border-slate-400 border-slate-300"
               aria-label="Go forward 15 seconds"
             >
               <svg
@@ -314,11 +322,16 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
             </button>
           </div>
 
-          <audio x-ref="audioEl" x-on:ended="this.isPlaying = false" src={meditation["Audio File URL"]} />
+          <audio
+            x-ref="audioEl"
+            x-on:ended="this.isPlaying = false"
+            src={meditation["Audio File URL"]}
+          />
         </div>
       ) : null
     }
 
+    {/* Creator Attribution */}
     {
       creatorName && creatorAvatarUrl ? (
         <div class="mt-8 p-6 rounded-2xl bg-slate-100 dark:bg-slate-700">
@@ -332,10 +345,51 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
 
             <p class="m-0 text-xl">
               Created by
-              <a class="link dark:text-slate-200" href={creatorWebsiteUrl} target="_blank">
+              <a
+                class="link dark:text-slate-200"
+                href={creatorWebsiteUrl}
+                target="_blank"
+              >
                 {creatorName}
               </a>
             </p>
+
+            {creator["YouTube Channel"] ? (
+              <a
+                x-data
+                class="btn btn-sm btn-circle btn-outline dark:border-slate-600 text-slate-500 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-500 dark:hover:border-slate-400 border-slate-300"
+                href={creator["YouTube Channel"]}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={20}
+                  height={20}
+                  viewBox="0 0 48 48"
+                >
+                  <mask id="ipSYoutube0">
+                    <g fill="none" stroke-linejoin="round">
+                      <path
+                        fill="#fff"
+                        stroke="#fff"
+                        stroke-width="4"
+                        d="M11.064 10.414c5.543-.276 9.854-.414 12.934-.414s7.393.138 12.939.415a6 6 0 0 1 5.68 5.492c.254 3.034.381 5.706.381 8.017c0 2.339-.13 5.048-.39 8.128a6 6 0 0 1-5.587 5.483c-4.741.31-9.082.465-13.023.465c-3.94 0-8.28-.155-13.018-.465a6 6 0 0 1-5.587-5.48c-.263-3.103-.395-5.814-.395-8.131c0-2.29.129-4.963.385-8.02a6 6 0 0 1 5.68-5.49Z"
+                      />
+                      <path
+                        fill="#000"
+                        stroke="#000"
+                        stroke-width="3.429"
+                        d="M21 19.61v8.796a.857.857 0 0 0 1.33.715l6.597-4.36a.857.857 0 0 0 .006-1.427l-6.598-4.436a.857.857 0 0 0-1.335.711Z"
+                      />
+                    </g>
+                  </mask>
+                  <path
+                    fill="currentColor"
+                    d="M0 0h48v48H0z"
+                    mask="url(#ipSYoutube0)"
+                  />
+                </svg>
+              </a>
+            ) : null}
           </div>
         </div>
       ) : null

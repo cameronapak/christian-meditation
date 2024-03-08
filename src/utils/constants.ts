@@ -9,7 +9,7 @@ export const cssGradients = [
   "bg-gradient-to-r from-yellow-50 via-green-100 to-teal-200 text-yellow-900 dark:bg-gradient-to-r dark:from-green-900 dark:to-teal-900 dark:text-yellow-300",
   "bg-gradient-to-l from-red-100 via-yellow-50 to-green-100 text-red-800 dark:bg-gradient-to-l dark:from-red-900 dark:to-green-900 dark:text-red-200",
   "bg-gradient-to-t from-indigo-100 via-blue-200 to-cyan-300 text-indigo-800 dark:bg-gradient-to-t dark:from-indigo-900 dark:via-blue-900 dark:to-cyan-900 dark:text-indigo-200",
-  "bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 text-slate-800 dark:bg-gradient-to-b dark:from-gray-800 dark:via-gray-900 dark:to-gray-900 dark:text-slate-300",
+  "bg-gradient-to-b from-slate-50 via-slate-100 to-slate-200 text-slate-800 dark:bg-gradient-to-b dark:from-slate-800 dark:via-slate-900 dark:to-slate-900 dark:text-slate-300",
   "bg-gradient-to-tr from-red-100 via-yellow-50 to-green-100 text-red-800 dark:bg-gradient-to-tr dark:from-red-900 dark:to-green-900 dark:text-red-200",
   "bg-gradient-to-bl from-teal-100 via-blue-200 to-indigo-300 text-teal-800 dark:bg-gradient-to-bl dark:from-teal-900 dark:via-blue-900 dark:to-indigo-900 dark:text-teal-200",
   "bg-gradient-to-r from-pink-50 via-purple-100 to-indigo-200 text-pink-800 dark:bg-gradient-to-r dark:from-pink-800 dark:via-purple-900 dark:to-indigo-900 dark:text-pink-300",

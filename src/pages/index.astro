@@ -97,7 +97,7 @@ try {
       >
         <button
           x-data
-          class="btn btn-circle btn-outline dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-600 border-gray-300 rounded-full btn-sm"
+          class="btn btn-sm btn-circle btn-outline dark:border-slate-600 text-slate-500 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-500 dark:hover:border-slate-400 border-slate-300"
           @click="isDarkModeEnabled = !isDarkModeEnabled"
         >
           <svg
@@ -127,14 +127,14 @@ try {
         x-model="searchQuery"
         type="search"
         placeholder="Search by title, creator, or duration"
-        class="input input-bordered bg-white w-full dark:bg-slate-800 dark:!border-gray-600 dark:fill-gray-100 dark:text-slate-200"
+        class="input input-bordered bg-white w-full dark:bg-slate-800 dark:!border-slate-600 dark:fill-slate-100 dark:text-slate-200"
       />
 
       {/* Toggle Show Favorites Button */}
       <div class="tooltip tooltip-left" data-tip="See Your Favorites">
         <button
-          class="btn btn-circle btn-outline dark:border-gray-600 dark:hover:bg-slate-600 dark:text-slate-200 border-gray-300 hover:bg-inherit hover:border-inherit rounded-full btn-md"
-          x-bind:class="{ 'text-red-700 bg-red-100 border-red-100 hover:bg-red-700 hover:border-red-700 hover:text-red-100 dark:text-red-200 dark:bg-red-900 dark:border-red-900': filterToFavorites }"
+          class="btn btn-circle btn-outline dark:border-slate-600 text-slate-500 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-500 dark:hover:border-slate-400 border-slate-300"
+          x-bind:class="{ '!text-red-700 !bg-red-100 !border-red-100 !hover:bg-red-700 !hover:border-red-700 !hover:text-red-100 !dark:text-red-200 !dark:bg-red-900 !dark:border-red-900': filterToFavorites }"
           x-on:click="filterToFavorites = !filterToFavorites"
         >
           <svg
