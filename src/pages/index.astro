@@ -16,10 +16,18 @@ const emptyData = {
   results: [],
 };
 
+const searchQueryParam = Astro.url.searchParams.get("q") || "";
+
 let allMeditations: MeditationData = emptyData;
 let allCreators: CreatorData = emptyData;
 try {
-  allMeditations = await getAllMeditations();
+  // If I have a search param, it's going to search client-side anyways,
+  // so... don't bother fetching the data.
+  if (searchQueryParam) {
+    allMeditations = emptyData;
+  } else {
+    allMeditations = await getAllMeditations();
+  }
   allCreators = await getAllCreators();
 } catch {
   console.error("Failed to fetch necessary data for the page to load.");
@@ -76,6 +84,10 @@ try {
       filterToFavorites: $persist(false),
       favoriteMeditations: $persist([]),
       init() {
+        if ('${searchQueryParam}'.length) {
+          this.searchQuery = '${searchQueryParam}';
+        }
+
         this.search();
 
         $watch('filterToFavorites', () => {
