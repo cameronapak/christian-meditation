@@ -201,14 +201,32 @@ export async function createMeditation({
   creatorId,
   durationInSeconds,
   audioFileUrl,
+  youTubeVideoUrl
 }: {
   title: string,
   adminNotes: string,
   creatorId: number,
   durationInSeconds: number,
-  audioFileUrl: string
+  audioFileUrl?: string,
+  youTubeVideoUrl?: string
 }): Promise<Meditation> {
   const baseUrl = new URL('https://api.baserow.io/api/database/rows/table/259238/?user_field_names=true');
+
+  const bodyData = {
+    "Title": title,
+    "Notes": adminNotes,
+    "Creator": [
+      creatorId
+    ],
+    "Duration": pickDurationIdFromSeconds(durationInSeconds),
+  } as any;
+
+  if (audioFileUrl) {
+    bodyData['Audio File URL'] = audioFileUrl;
+  }
+  if (youTubeVideoUrl) {
+    bodyData['YouTube Video URL'] = youTubeVideoUrl;
+  }
 
   const response = await fetch(baseUrl, {
     method: "POST",
@@ -216,16 +234,7 @@ export async function createMeditation({
       Authorization: 'Token ' + import.meta.env.BASEROW_API_KEY,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      "Title": title,
-      "Notes": adminNotes,
-      "YouTube Video URL": "",
-      "Creator": [
-        creatorId
-      ],
-      "Duration": pickDurationIdFromSeconds(durationInSeconds),
-      "Audio File URL": audioFileUrl
-    })
+    body: JSON.stringify(bodyData)
   })
 
   const data = await response.json();
