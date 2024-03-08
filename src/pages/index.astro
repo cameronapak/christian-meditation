@@ -84,11 +84,11 @@ try {
       filterToFavorites: $persist(false),
       favoriteMeditations: $persist([]),
       init() {
-        if ('${searchQueryParam}'.length) {
-          this.searchQuery = '${searchQueryParam}';
-        }
-
-        this.search();
+        this.searchQuery = '${searchQueryParam || ''}';
+        
+        $nextTick(() => {
+          this.search();
+        });
 
         $watch('filterToFavorites', () => {
           this.search();
