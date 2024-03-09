@@ -84,4 +84,14 @@ export const partial = true;
   ) : null
 }
 
-{meditationCount ? <span id="num-of-meditations" hx-swap-oob="true" class="text-sm text-slate-500 dark:text-slate-400 block">We have {meditationCount}+ meditations and are continually growing</span> : null}
+{
+  meditationCount ? (
+    <span
+      id="num-of-meditations"
+      hx-swap-oob="true"
+      class="text-sm text-slate-500 dark:text-slate-400 block transition-opacity opacity-100"
+    >
+      We have {meditationCount}+ meditations and are continually growing
+    </span>
+  ) : null
+}
