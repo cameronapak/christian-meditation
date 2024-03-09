@@ -157,18 +157,25 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
     </div>
     {
       meditation["YouTube Video ID"] ? (
-        <iframe
-          class="aspect-video w-full rounded-2xl shadow-lg bg-slate-100 dark:bg-slate-700"
-          src={
-            "https://www.youtube.com/embed/" +
-            meditation["YouTube Video ID"] +
-            "?rel=0"
-          }
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        />
+        <section class="grid max-sm:grid-rows-2 sm:grid-cols-[1fr_auto] gap-6">
+          <iframe
+            class="aspect-video w-full rounded-2xl shadow-lg bg-slate-100 dark:bg-slate-700"
+            src={
+              "https://www.youtube.com/embed/" +
+              meditation["YouTube Video ID"] +
+              "?rel=0"
+            }
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          />
+          {/* Meditation Notes */}
+          <textarea
+            placeholder="Take notes here..."
+            class="bg-slate-50 shadow-inner resize-none textarea textarea-bordered textarea-md rounded-2xl leading-snug w-full sm:max-w-lg bg-inherit m-0"
+          />
+        </section>
       ) : null
     }
 
@@ -352,10 +359,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
 
               <div class="flex-col gap-0 m-0 text-xl max-sm:text-sm">
                 <p class="m-0 text-sm max-sm:text-xs">Created by</p>
-                <a
-                  class="link dark:text-slate-200"
-                  href={`/?q=${creatorName}`}
-                >
+                <a class="link dark:text-slate-200" href={`/?q=${creatorName}`}>
                   {creatorName}
                 </a>
               </div>
@@ -452,6 +456,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
         </div>
       ) : null
     }
+
     <Footer />
   </main>
 </Layout>
