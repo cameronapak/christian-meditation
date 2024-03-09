@@ -24,7 +24,7 @@ const shouldFilterByIds = Boolean(ids.length);
 if (shouldFilterByIds) {
   allMeditations = await getMeditationsByIds(ids);
 } else {
-  allMeditations = await getAllMeditations(getMeditationsParams) || [];
+  allMeditations = (await getAllMeditations(getMeditationsParams)) || [];
 }
 const allCreators = await getAllCreators();
 
@@ -45,6 +45,7 @@ export const partial = true;
         duration={result.Duration.value}
         creatorName={creator?.Name}
         creatorAvatarUrl={creator?.Avatar[0].url}
+        isAudioMeditation={Boolean(result["Audio File URL"])}
       />
     );
   })

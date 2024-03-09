@@ -2,36 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import Logo from "../components/Logo.astro";
 import Footer from "../components/Footer.astro";
-import MeditationCard from "../components/MeditationCard.astro";
-import {
-  getAllMeditations,
-  type MeditationData,
-} from "../api/baserow/meditations";
-import { getAllCreators, type CreatorData } from "../api/baserow/creators";
-
-const emptyData = {
-  count: 0,
-  next: "",
-  previous: "",
-  results: [],
-};
 
 const searchQueryParam = Astro.url.searchParams.get("q") || "";
-
-let allMeditations: MeditationData = emptyData;
-let allCreators: CreatorData = emptyData;
-try {
-  // If I have a search param, it's going to search client-side anyways,
-  // so... don't bother fetching the data.
-  if (searchQueryParam) {
-    allMeditations = emptyData;
-  } else {
-    allMeditations = await getAllMeditations();
-  }
-  allCreators = await getAllCreators();
-} catch {
-  console.error("Failed to fetch necessary data for the page to load.");
-}
 ---
 
 <Layout
@@ -84,7 +56,7 @@ try {
       filterToFavorites: $persist(false),
       favoriteMeditations: $persist([]),
       init() {
-        this.searchQuery = '${searchQueryParam || ''}';
+        this.searchQuery = '${searchQueryParam || ""}';
         
         $nextTick(() => {
           this.search();
@@ -203,25 +175,7 @@ try {
       class="list-none grid max-sm:grid-cols-1 grid-cols-2 gap-4 m-0 pl-0 mt-6"
       id="meditations-list"
       x-ref="meditationsList"
-    >
-      {
-        allMeditations.results.map((result) => {
-          const creator = allCreators.results.find(
-            (creator) => creator.id === result.Creator[0].id,
-          );
-
-          return (
-            <MeditationCard
-              id={result.id}
-              title={result.Title}
-              duration={result.Duration.value}
-              creatorName={creator?.Name}
-              creatorAvatarUrl={creator?.Avatar[0].url}
-            />
-          );
-        })
-      }
-    </ul>
+    ></ul>
 
     <Footer />
   </main>
