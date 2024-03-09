@@ -1,0 +1,18 @@
+---
+import Logo from "../components/Logo.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Uh oh, page not found">
+  <main
+    class="container p-6 outline-none dark:!text-slate-100 min-h-[100svh] flex flex-col gap-12"
+  >
+    <Logo />
+
+    <section class="flex flex-col gap-4 items-center">
+      <h1 class="m-0 text-center">Oops!</h1>
+      <p class="m-0 text-center">Sorry, we couldn't find what you were looking for.</p>
+      <a class="btn btn-secondary w-fit rounded-full" href="/">Let's go home</a>
+    </section>
+  </main>
+</Layout>
