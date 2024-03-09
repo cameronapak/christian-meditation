@@ -11,19 +11,23 @@ if (!id) {
   return Astro.redirect("/");
 }
 
-const meditation = await getMeditationById(id);
-const creator = await getCreatorById(meditation.Creator[0].id);
+let meditation;
+let creator;
 
-const creatorName = creator?.Name || "";
-const creatorAvatarUrl = creator?.Avatar?.[0]?.url || "";
-const creatorWebsiteUrl = creator?.Website
-  ? new URL(creator?.Website || "https://soulrest.melos.church")?.href || ""
-  : "";
+try {
+  meditation = await getMeditationById(id);
+  creator = await getCreatorById(meditation.Creator[0].id);
+} catch (error) {
+  console.error(error);
+  return Astro.redirect("/");
+}
 
 if (!meditation) {
   return Astro.redirect("/");
 }
 
+const creatorName = creator?.Name || "";
+const creatorAvatarUrl = creator?.Avatar?.[0]?.url || "";
 const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on Soul Rest`;
 ---
 
