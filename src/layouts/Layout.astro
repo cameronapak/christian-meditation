@@ -67,6 +67,14 @@ const descriptionToUse = description || "Soul Rest " + title;
 
 <script>
   import * as htmx from "htmx.org";
+  import { prefetch } from "astro:prefetch";
 
   window.htmx = htmx;
+  prefetch('/offline');
+</script>
+
+<script is:inline>
+  if (typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('sw.js')
+  }
 </script>

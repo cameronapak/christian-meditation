@@ -30,5 +30,6 @@ if (SENTRY_DSN && SENTRY_AUTH_TOKEN && SENTRY_PROJECT) {
 export default defineConfig({
   integrations,
   output: "server",
-  adapter: netlify()
+  adapter: netlify(),
+  prefetch: true
 });
