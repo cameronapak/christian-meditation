@@ -256,7 +256,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
             <div class="flex justify-center items-center gap-4 dark:text-white">
               <button
                 x-on:click="goBackwards15Seconds()"
-                class="btn btn-circle btn-outline text-inherit glass bg-white/30 hover:bg-white/40 hover:text-inherit border-none dark:bg-black/40 dark:hover:bg-black/50"
+                class="btn btn-circle btn-outline text-inherit bg-white hover:bg-white shadow-md hover:text-inherit border-none dark:text-slate-700"
                 aria-label="Go back 15 seconds"
               >
                 <svg
@@ -274,7 +274,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
               </button>
 
               <button
-                class="relative btn btn-circle btn-lg bg-white/50 glass text-inherit !h-24 !w-24 hover:bg-white/60 border-none overflow-hidden dark:bg-black/40 dark:hover:bg-black/50"
+                class="relative btn btn-circle btn-lg bg-white hover:bg-white shadow-md text-inherit !h-24 !w-24 border-none overflow-hidden dark:text-slate-700"
                 x-on:click="handleClick()"
                 x-ref="playBtn"
               >
@@ -320,7 +320,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
 
               <button
                 x-on:click="goForwards15Seconds()"
-                class="btn btn-circle btn-outline text-inherit glass bg-white/30 hover:bg-white/40 hover:text-inherit border-none dark:bg-black/40 dark:hover:bg-black/50"
+                class="btn btn-circle btn-outline text-inherit bg-white hover:bg-white shadow-md hover:text-inherit border-none dark:text-slate-700"
                 aria-label="Go forward 15 seconds"
               >
                 <svg
