@@ -35,7 +35,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
 ---
 
 <Layout
-  className="bg-white dark:bg-slate-800 dark:!text-slate-100"
+  className="bg-white dark:bg-slate-800 dark:text-slate-100!"
   title={title}
   description={title}
 >
@@ -143,9 +143,9 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
     {/* Breadcrumbs */}
     <div class="flex flex-col gap-0 dark:text-slate-200">
       <div class="text-sm breadcrumbs m-0">
-        <ul class="!p-0 !m-0">
+        <ul class="p-0! m-0!">
           <li><a href="/" class="dark:text-slate-200">Home</a></li>
-          <li class="flex-shrink w-full">
+          <li class="shrink w-full">
             <h1 class="text-sm ellipsis font-normal">
               {meditation.Title}
             </h1>
@@ -171,7 +171,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
           {/* Meditation Notes */}
           <textarea
             placeholder="Take a temporary note here..."
-            class="bg-slate-50 shadow-inner resize-none textarea textarea-bordered textarea-md rounded-2xl leading-snug w-full sm:max-w-lg bg-inherit m-0 dark:bg-slate-900"
+            class="bg-slate-50 shadow-inner resize-none textarea textarea-md rounded-2xl leading-snug w-full sm:max-w-lg bg-inherit m-0 dark:bg-slate-900"
           />
         </section>
       ) : null
@@ -274,7 +274,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
               </button>
 
               <button
-                class="relative btn btn-circle btn-lg bg-white hover:bg-white shadow-md text-inherit !h-24 !w-24 border-none overflow-hidden dark:text-slate-700"
+                class="relative btn btn-circle btn-lg bg-white hover:bg-white shadow-md text-inherit h-24! w-24! border-none overflow-hidden dark:text-slate-700"
                 x-on:click="handleClick()"
                 x-ref="playBtn"
               >
@@ -348,7 +348,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
           {/* Meditation Notes */}
           <textarea
             placeholder="Take a temporary note here..."
-            class="bg-slate-50 shadow-inner resize-none textarea textarea-bordered textarea-md rounded-2xl leading-snug w-full sm:max-w-lg bg-inherit m-0 dark:bg-slate-900"
+            class="bg-slate-50 shadow-inner resize-none textarea textarea-md rounded-2xl leading-snug w-full sm:max-w-lg bg-inherit m-0 dark:bg-slate-900"
           />
         </section>
       ) : null
@@ -359,7 +359,7 @@ const title = `${meditation.Title} | by ${creatorName} | Christian Meditation on
       creatorName && creatorAvatarUrl ? (
         <div class="mt-8 p-6 rounded-2xl bg-slate-100 dark:bg-slate-700">
           <div class="flex max-sm:flex-col gap-4 items-center">
-            <section class="flex gap-4 items-center sm:flex-grow">
+            <section class="flex gap-4 items-center sm:grow">
               <img
                 class="m-0 w-10 h-10 rounded-full shadow-sm bg-cover object-cover"
                 src={creatorAvatarUrl || ""}
