@@ -1,3 +1,7 @@
+import typography from '@tailwindcss/typography';
+
+const typographyPlugin = typography();
+
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -15,11 +19,12 @@ export default {
 	// HTML element. All children classes will be dark mode.
 	darkMode: 'selector',
 	// Change your theme at https://daisyui.com/docs/themes/.
-	daisyui: {
-		themes: ["retro"]
-	},
 	plugins: [
-		require("@tailwindcss/typography"),
-		require("daisyui")
+		{
+			...typographyPlugin,
+			handler(api) {
+				typographyPlugin.handler({ ...api, addComponents: api.addBase });
+			},
+		},
 	],
 }

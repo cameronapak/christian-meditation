@@ -13,7 +13,7 @@ const allPosts = await getCollection("posts");
       <Logo />
     </div>
     <div class="text-sm breadcrumbs">
-      <ul class="!p-0 !m-0">
+      <ul class="p-0! m-0!">
         <li><a href="/" class="dark:text-slate-200">Home</a></li>
         <li>Posts</li>
       </ul>
@@ -23,7 +23,7 @@ const allPosts = await getCollection("posts");
       {
         allPosts.map((post) => (
           <li class="dark:text-slate-200 ">
-            <a class="dark:text-slate-200" href={`/posts/${post.slug}`}>{post.data.title}</a>
+            <a class="dark:text-slate-200" href={`/posts/${post.data.slug}`}>{post.data.title}</a>
           </li>
         ))
       }

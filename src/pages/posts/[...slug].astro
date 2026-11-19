@@ -1,18 +1,18 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Logo from "../../components/Logo.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("posts");
   return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.data.slug },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 export const prerender = true;
 ---
@@ -27,14 +27,14 @@ export const prerender = true;
     </div>
 
     <div class="text-sm breadcrumbs m-0">
-      <ul class="!p-0 !m-0">
+      <ul class="p-0! m-0!">
         <li><a href="/">Home</a></li>
         <li><a href="/posts">Posts</a></li>
         <li>Post</li>
       </ul>
     </div>
 
-    <h1 class="!mb-2">{entry.data.title}</h1>
+    <h1 class="mb-2!">{entry.data.title}</h1>
 
     <p class="p-0 m-0">
       Posted on {

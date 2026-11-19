@@ -1,7 +1,7 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
-import * as htmx from 'htmx.org';
+import htmx from 'htmx.org';
 
 declare global {
   interface Window {
@@ -12,6 +12,7 @@ declare global {
 
 // https://docs.astro.build/en/guides/environment-variables/#intellisense-for-typescript
 interface ImportMetaEnv {
+  readonly PUBLIC_SENTRY_DSN: string;
   /** https://docs.sentry.io/platforms/javascript/guides/astro/#configure */
   readonly SENTRY_DSN: string;
   /** https://docs.sentry.io/platforms/javascript/guides/astro/#configure */

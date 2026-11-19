@@ -58,7 +58,7 @@ const descriptionToUse = description || "Soul Rest " + title;
   </head>
 
   <body
-    class={"prose !max-w-[100vw] min-h-[100svh] w-full overflow-x-hidden dark:bg-slate-800 dark:!text-slate-100 " +
+    class={"prose max-w-[100vw]! min-h-svh w-full overflow-x-hidden dark:bg-slate-800 dark:text-slate-100! " +
       className}
   >
     <slot />
@@ -66,7 +66,7 @@ const descriptionToUse = description || "Soul Rest " + title;
 </html>
 
 <script>
-  import * as htmx from "htmx.org";
+  import htmx from "htmx.org";
   import { prefetch } from "astro:prefetch";
 
   window.htmx = htmx;
@@ -75,6 +75,6 @@ const descriptionToUse = description || "Soul Rest " + title;
 
 <script is:inline>
   if (typeof navigator.serviceWorker !== 'undefined') {
-    navigator.serviceWorker.register('sw.js')
+    navigator.serviceWorker.register('/sw.js').catch(console.error)
   }
 </script>

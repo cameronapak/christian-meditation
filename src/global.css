@@ -1,3 +1,57 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@config "../tailwind.config.mjs";
+@plugin "daisyui" {
+  themes: retro --default;
+  exclude: typography;
+}
+
+@plugin "daisyui/theme" {
+  name: retro;
+  default: true;
+  --color-primary: #ef9995;
+  --color-primary-content: #282425;
+  --color-secondary: #a4cbb4;
+  --color-secondary-content: #282425;
+  --color-accent: #dc8850;
+  --color-accent-content: #282425;
+  --color-neutral: #2e282a;
+  --color-neutral-content: #ede6d4;
+  --color-base-100: #ece3ca;
+  --color-base-200: #e4d8b4;
+  --color-base-300: #dbca9a;
+  --color-base-content: #282425;
+  --radius-field: 0.4rem;
+  --radius-box: 0.4rem;
+}
+
+@layer utilities {
+  .input {
+    height: 3rem;
+    padding-inline: 1rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+  }
+  .btn {
+    --size: 3rem;
+  }
+  .btn-sm {
+    --size: 2rem;
+  }
+  .btn-xs {
+    --size: 1.5rem;
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
 /* Add CSS styles below. */
 .example-class {
   /* You can even apply Tailwind classes here. */
@@ -20,7 +74,7 @@
 }
 
 .prose blockquote {
-  @apply dark:text-slate-300 dark:!border-slate-400;
+  @apply dark:text-slate-300 dark:border-slate-400!;
 }
 
 .prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker {
@@ -42,4 +96,3 @@
 [x-cloak] {
   display: none;
 }
-
